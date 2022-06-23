@@ -198,6 +198,7 @@
     top: 45%;
     left: 0;
 }
+
 /* Fire */
 .fire {
     border-radius: 100%;
@@ -337,7 +338,6 @@
     transform: rotate(-45deg);
     opacity: 0.9;
 }
-
 #frame {
     position: relative;
     width: 100%;

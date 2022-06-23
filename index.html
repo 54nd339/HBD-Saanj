@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/cdcfed7af7.js" crossorigin="anonymous"></script>
+    <script id="YT"></script>
     <link rel="icon" href="Assets/Index/icon.ico" type="image/x-icon">
     <link href="Assets/Index/index.css" rel="stylesheet">
     <script src="Assets/Index/index.js"></script>
@@ -33,6 +34,7 @@
             <img src="https://cdn.dribbble.com/users/6191/screenshots/3661586/cat_sleep_dribbble.gif" alt="" onclick="new Audio('Assets/Music/Meow/teddy.mp3').play()">
         </div>
     </div>
+
     <section class="passcode" style="pointer-events:none">
         <div class="pass-main" style="z-index:1">
             <div class="pass-content container-fluid">
@@ -95,31 +97,31 @@
         <audio id="Music3" loop="loop"><source src="Assets/Music/Special.mp3"/></audio>
         <audio id="Music4" loop="loop"><source src="Assets/Music/Game.mp3"/></audio>
     </div>
-    <span class="position-absolute trigger">
-        <!-- hidden trigger to apply 'stuck' styles -->
-    </span>
+    <span class="position-absolute trigger"> <!-- hidden trigger to apply 'stuck' styles --> </span>
     
     <nav class="navbar navbar-expand-sm sticky-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" onclick="bToggle(this)"><img src="Assets/Index/logo.jpg" style="width:50px" class="rounded-circle"></a>
+            <a class="navbar-brand" onclick="bToggle(this)" ondblclick="if(screen.width < 720) this.href='#header'">
+                <img src="Assets/Index/logo.jpg" style="width:50px" class="rounded-circle">
+            </a>
             <button class="navbar-toggler collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span> </span><span> </span><span> </span>
             </button>
             <nav id="collapsibleNavbar" class="justify-content-center collapse navbar-collapse">
                 <div id="menu" class="btn-group btn-group-lg d-flex" role="group">
-                    <button id="start" class="menu btn btn-outline-light active" onclick="setURL('Assets/Home/Start.html'); EvalSound('Music1'); toggle(this, 'home')">
+                    <button id="start" class="menu btn btn-outline-light active" onclick="setURL(this,'Assets/Home/Start.html'); EvalSound('Music1'); toggle(this, 'home')">
                         <i class="fa-solid fa-house"></i><b> HOME </b>
                     </button>
-                    <button class="menu btn btn-outline-light" onclick="setURL('Assets/Wishes/?hruda'); EvalSound('Music2'); toggle(this, 'wish')">
+                    <button class="menu btn btn-outline-light" onclick="setURL(this,'Assets/Wishes/?hruda'); EvalSound('Music2'); toggle(this, 'wish')">
                         <i class="fa-solid fa-heart"></i><b> WISH </b>
                     </button>
-                    <button class="menu btn btn-outline-light" onclick="setURL('Assets/Special/'); EvalSound('Music3'); toggle(this, 'spec')">
+                    <button class="menu btn btn-outline-light" onclick="setURL(this,'Assets/Special/'); EvalSound('Music3'); toggle(this, 'spec')">
                         <i class="fa-solid fa-gift"></i><b> SPEC </b>
                     </button>
-                    <button class="menu btn btn-outline-light d-none d-lg-block" onclick="setURL('Assets/Games/Rule.html'); EvalSound('Music4'); toggle(this, 'game')">
+                    <button class="menu btn btn-outline-light d-none d-lg-block" onclick="setURL(this,'Assets/Games/Rule.html'); EvalSound('Music4'); toggle(this, 'game')">
                         <i class="fa-solid fa-gamepad"></i><b> GAME </b>
                     </button>
-                    <button class="menu btn btn-outline-light" onclick="check(); EvalSound('stop'); toggle(this, 'play')">
+                    <button class="menu btn btn-outline-light" onclick="setURL(this,'Assets/Index/Blank.html'); EvalSound('stop'); toggle(this, 'play')">
                         <i class="fa-solid fa-music"></i><b> PLAY </b>
                     </button>
                 </div>
@@ -139,15 +141,15 @@
 
     <div id="content" class="container-fluid mt-3">
         <div class="main row" style="min-height:89vh">
-            <div id="sidebar" class="shadow-lg col-sm-3 tab-content bg-dark rounded d-none d-lg-block">
+            <div id="sidebar" class="shadow-lg col-sm-3 tab-content bg-dark rounded">
                 <h3 id="link" class="quicks m-4 text-light text-center" style="background-color:#AC30AE; border-radius: 2em;">Some Quick Links</h3>
                 <h3 id="tips" class="quicks m-4 text-light text-center" style="background-color:#AC30AE; border-radius: 2em; display: none;">Some Quick Tips</h3>
                 <div id="home" class="tab-pane container-fluid" style="display: block">
                     <nav class="flex-column d-flex">
                         <div class="btn-group-vertical btn-group-lg" role="group">
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Home/Start.html')"><i class="fa-solid fa-icons"></i><b> Zappy Zap</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Home/Animate.html')"><i class="fa-solid fa-icons"></i><b> Watch Me</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Home/End.html')"><i class="fa-solid fa-icons"></i><b> Streaks</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Home/Start.html')"><i class="fa-solid fa-icons"></i><b> Zappy Zap</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Home/Animate.html')"><i class="fa-solid fa-icons"></i><b> Watch Me</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Home/End.html')"><i class="fa-solid fa-icons"></i><b> Streaks</b></button>
                         </div>
                     </nav>
                 </div>
@@ -156,63 +158,65 @@
                         <div class="col-md-6">
                             <nav class="flex-column d-flex">
                                 <div class="btn-group-vertical btn-group-md" role="group">
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?hruda')"><i class="fa-solid fa-icons"></i><b> Hruda</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?bans')"><i class="fa-solid fa-icons"></i><b> Bansika</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?shreya')"><i class="fa-solid fa-icons"></i><b> Shreya</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?lika')"><i class="fa-solid fa-icons"></i><b> Sonalika</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?shalini')"><i class="fa-solid fa-icons"></i><b> Shalini</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?jaga')"><i class="fa-solid fa-icons"></i><b> Jagannath</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?sahil')"><i class="fa-solid fa-icons"></i><b> Sahil</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?meera')"><i class="fa-solid fa-icons"></i><b> Meera</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?kukoo')"><i class="fa-solid fa-icons"></i><b> Kukoo</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?lowri')"><i class="fa-solid fa-icons"></i><b> Lowri</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?hruda')"><i class="fa-solid fa-icons"></i><b> Hruda</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?bans')"><i class="fa-solid fa-icons"></i><b> Bansika</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?shreya')"><i class="fa-solid fa-icons"></i><b> Shreya</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?lika')"><i class="fa-solid fa-icons"></i><b> Sonalika</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?shalini')"><i class="fa-solid fa-icons"></i><b> Shalini</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?jaga')"><i class="fa-solid fa-icons"></i><b> Jagannath</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?sahil')"><i class="fa-solid fa-icons"></i><b> Sahil</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?meera')"><i class="fa-solid fa-icons"></i><b> Meera</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?kukoo')"><i class="fa-solid fa-icons"></i><b> Kukoo</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?lowri')"><i class="fa-solid fa-icons"></i><b> Lowri</b></button>
                                 </div>
                             </nav>
                         </div>
                         <div class="col-md-6">
                             <nav class="flex-column d-flex">
                                 <div class="btn-group-vertical btn-group-md" role="group">
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?ankita')"><i class="fa-solid fa-icons"></i><b> Ankita</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?sruti')"><i class="fa-solid fa-icons"></i><b> Sruti</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?tani')"><i class="fa-solid fa-icons"></i><b> Tanishka</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?vaish')"><i class="fa-solid fa-icons"></i><b> Vaishali</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?ujju')"><i class="fa-solid fa-icons"></i><b> Ujjawal</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?nik')"><i class="fa-solid fa-icons"></i><b> Nik</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?jwala')"><i class="fa-solid fa-icons"></i><b> Jwala</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?shiv')"><i class="fa-solid fa-icons"></i><b> Shivansh</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?sejol')"><i class="fa-solid fa-icons"></i><b> Sejol</b></button>
-                                    <button class="btn btn-outline-info" onclick="setURL('Assets/Wishes/?gita')"><i class="fa-solid fa-icons"></i><b> Gitanjali</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?ankita')"><i class="fa-solid fa-icons"></i><b> Ankita</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?sruti')"><i class="fa-solid fa-icons"></i><b> Sruti</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?tani')"><i class="fa-solid fa-icons"></i><b> Tanishka</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?vaish')"><i class="fa-solid fa-icons"></i><b> Vaishali</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?ujju')"><i class="fa-solid fa-icons"></i><b> Ujjawal</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?nik')"><i class="fa-solid fa-icons"></i><b> Nik</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?jwala')"><i class="fa-solid fa-icons"></i><b> Jwala</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?shiv')"><i class="fa-solid fa-icons"></i><b> Shivansh</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?sejol')"><i class="fa-solid fa-icons"></i><b> Sejol</b></button>
+                                    <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Wishes/?gita')"><i class="fa-solid fa-icons"></i><b> Gitanjali</b></button>
                                 </div>
                             </nav>
                         </div>
-                        <br><p class="p-2 text-white text-center">Use arrow keys(< / >) to navigate</p><br>
+                        <br><p class="p-2 text-white text-center d-none d-lg-block">Use arrow keys(< / >) to navigate</p>
+                        <p class="p-2 text-white text-center d-sm-none">Use buttons or swipe fingers to navigate</p><br>
                     </div>
                 </div>
                 <div id="spec" class="tab-pane container-fluid">
                     <nav class="flex-column d-flex">
                         <div class="btn-group-vertical btn-group-lg" role="group">
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/')"><i class="fa-solid fa-icons"></i><b> Special</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?hpandya')"><i class="fa-solid fa-icons"></i><b> Hardik</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?akumar')"><i class="fa-solid fa-icons"></i><b> Akshay</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?amalik')"><i class="fa-solid fa-icons"></i><b> Armaann</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?akhurana')"><i class="fa-solid fa-icons"></i><b> Ayushmaann</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?karyan')"><i class="fa-solid fa-icons"></i><b> Karthik</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?jtangri')"><i class="fa-solid fa-icons"></i><b> Jyotica</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?kdpathak')"><i class="fa-solid fa-icons"></i><b> KD Pathak</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Special/?sumedh')"><i class="fa-solid fa-icons"></i><b> Sumedh</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/')"><i class="fa-solid fa-icons"></i><b> Special</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?hpandya')"><i class="fa-solid fa-icons"></i><b> Hardik</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?akumar')"><i class="fa-solid fa-icons"></i><b> Akshay</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?amalik')"><i class="fa-solid fa-icons"></i><b> Armaann</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?akhurana')"><i class="fa-solid fa-icons"></i><b> Ayushmaann</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?karyan')"><i class="fa-solid fa-icons"></i><b> Karthik</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?jtangri')"><i class="fa-solid fa-icons"></i><b> Jyotica</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?kdpathak')"><i class="fa-solid fa-icons"></i><b> KD Pathak</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Special/?sumedh')"><i class="fa-solid fa-icons"></i><b> Sumedh</b></button>
                         </div>
-                        <br><p class="p-2 text-white text-center">Use arrow keys to navigate and spacebar to pause</p><br>
+                        <br><p class="p-2 text-white text-center d-none d-lg-block">Use arrow keys(< / >) to navigate</p>
+                        <p class="p-2 text-white text-center d-sm-none">Use buttons or swipe fingers to navigate</p><br>
                     </nav>
                 </div>
                 <div id="game" class="tab-pane container-fluid">
                     <nav class="flex-column d-flex">
                         <div class="btn-group-vertical btn-group-lg" role="group">
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/Rule.html')"><i class="fa-solid fa-icons"></i><b> Rule</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/2048/')"><i class="fa-solid fa-icons"></i><b> 2048</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/Dino/')"><i class="fa-solid fa-icons"></i><b> Dino Dash</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/Matching/')"><i class="fa-solid fa-icons"></i><b> Mix-Match</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/Snake/')"><i class="fa-solid fa-icons"></i><b> Snake</b></button>
-                            <button class="btn btn-outline-info" onclick="setURL('Assets/Games/Wordle/')"><i class="fa-solid fa-icons"></i><b> Wordle</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/Rule.html')"><i class="fa-solid fa-icons"></i><b> Rule</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/2048/')"><i class="fa-solid fa-icons"></i><b> 2048</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/Dino/')"><i class="fa-solid fa-icons"></i><b> Dino Dash</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/Matching/')"><i class="fa-solid fa-icons"></i><b> Mix-Match</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/Snake/')"><i class="fa-solid fa-icons"></i><b> Snake</b></button>
+                            <button class="btn btn-outline-info" onclick="setURL(this,'Assets/Games/Wordle/')"><i class="fa-solid fa-icons"></i><b> Wordle</b></button>
                         </div>
                         <br><p id="game-code" class="text-center"></p>
                         <button class="btn btn-outline-danger" onclick="localStorage.clear(); code();"><i class="fa-solid fa-skull"></i><b> Reset High Scores / Code Pieces</b></button>
@@ -223,25 +227,25 @@
                         <div class="col-md-6">
                             <nav class="flex-column d-flex">
                                 <div class="btn-group-vertical btn-group-md" role="group">
-                                    <button id="yt1" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/zdXiSlRrgWQ?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt1" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/zdXiSlRrgWQ?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Naina Da Kya Kasoor</b></button>
-                                    <button id="yt2" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/qLCLvzTGFVM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt2" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/qLCLvzTGFVM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Dil Mere</b></button>
-                                    <button id="yt3" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/k5Ufj3pHlAM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt3" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/k5Ufj3pHlAM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Inna Pyaar</b></button>
-                                    <button id="yt4" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/ZGEGEeANyO8?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt4" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/ZGEGEeANyO8?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Mann Mera</b></button>
-                                    <button id="yt5" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/oSrH1UHHeg8?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt5" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/oSrH1UHHeg8?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Aap Se Milkar</b></button>
-                                    <button id="yt6" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/jEgAAyIPYPc?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt6" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/jEgAAyIPYPc?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Waareya</b></button>
-                                    <button id="yt7" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/DK_UsATwoxI?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt7" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/DK_UsATwoxI?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Nazm Nazm</b></button>
-                                    <button id="yt8" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/hVCYwwFwGEE?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt8" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/hVCYwwFwGEE?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Duniyaa</b></button>
-                                    <button id="yt9" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/WJP1HWB21EI?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt9" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/WJP1HWB21EI?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Kalla Sohna</b></button>
-                                    <button id="yt10" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/xLUCo7lhnxE?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt10" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/xLUCo7lhnxE?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Tu Hi Yaar Mera</b></button>
                                 </div>
                             </nav>
@@ -249,25 +253,25 @@
                         <div class="col-md-6">
                             <nav class="flex-column d-flex">
                                 <div class="btn-group-vertical btn-group-md" role="group">
-                                    <button id="yt11" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/aF108_YsXIw?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt11" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/aF108_YsXIw?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Jaise Mera Tu</b></button>
-                                    <button id="yt12" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/GtNrQy90Ih4?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt12" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/GtNrQy90Ih4?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Saibo</b></button>
-                                    <button id="yt13" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/0mQLTWvXbXM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt13" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/0mQLTWvXbXM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Jab Tak</b></button>
-                                    <button id="yt14" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/UcOx6Bm3_4k?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt14" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/UcOx6Bm3_4k?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Yeh Aaina</b></button>
-                                    <button id="yt15" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/mClF6mJV5xM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt15" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/mClF6mJV5xM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Teri Aankhon Me</b></button>
-                                    <button id="yt16" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/mt9xg0mmt28?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt16" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/mt9xg0mmt28?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Tum Se Hi</b></button>
-                                    <button id="yt17" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/sdZpM8paUnM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt17" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/sdZpM8paUnM?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Madhuram</b></button>
-                                    <button id="yt18" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/zlt38OOqwDc?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt18" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/zlt38OOqwDc?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Raabtaa</b></button>
-                                    <button id="yt19" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/RJD1fQ15I9Y?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt19" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/RJD1fQ15I9Y?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Khuda Jane</b></button>
-                                    <button id="yt20" class="btn btn-outline-info" onclick="setURL('https://www.youtube.com/embed/Vq8lbcb0Lcw?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
+                                    <button id="yt20" class="btn btn-outline-info" onclick="setURL(this,'https://www.youtube.com/embed/Vq8lbcb0Lcw?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')">
                                         <i class="fa-solid fa-icons"></i><b> Tujme Rab Dikhta he</b></button>
                                 </div>
                             </nav>
@@ -289,9 +293,10 @@
                     </nav>
                 </div>
             </div>
-            <div id="frm-container" class="col-sm-9 rounded d-flex flex-grow-1">
+            <div id="frm-container" class="col-sm-9 rounded flex-grow-1">
                 <div id="frame" class="container-fluid" style="overflow: hidden; border-radius: 0.25em;">
                     <iframe id="view" class="responsive-iframe" allowfullscreen></iframe>
+                    <div id="player" class="responsive-iframe" style="display: none"></div>
                 </div>
             </div>
         </div>
@@ -315,7 +320,7 @@
             <div id="secret" class="nav m-1 justify-content-center">
                 <div class="d-flex">
                     <h3 class="mt-2">Made with</h3>
-                    <button id="special" class="btn btn-dark btn-lg disabled" onclick="setURL('https://www.youtube.com/embed/kNz41VZldZ8'); EvalSound('stop'); toggle(this, 'success')">❤️</button>
+                    <button id="special" class="btn btn-dark btn-lg disabled" onclick="setURL(this,'https://www.youtube.com/embed/kNz41VZldZ8'); EvalSound('stop'); toggle(this, 'success')">❤️</button>
                 </div>
                 <div class="d-sm-none"><p>Checkout on PC for more content..</p></div>
             </div>

@@ -1,21 +1,23 @@
-let flag = false
+let active, activeq = '#link'
 function toggle(ele, id) {
+    active = $('#'+id)
     $('.tab-pane[style*="display: block"]').fadeOut('fast',
-        () => $('#'+id).fadeIn('slow'))
+        () => active.fadeIn('slow'))
     $('.menu.active').removeClass('active')
 
     if($(ele).hasClass('menu')) {
-        if(flag){
+        if(activeq === '#tips') {
             $('#tips').fadeOut('fast',
             () => $('#link').fadeIn('slow'))
-            flag = false
+            activeq = '#link'
         }
         $(ele).addClass('active')
-    } else {
-        if(!flag){
+    }
+    else {
+        if(activeq === '#link') {
             $('#link').fadeOut('fast',
             () => $('#tips').fadeIn('slow'))
-            flag = true
+            activeq = '#tips'
         }
     }
 }
@@ -45,21 +47,74 @@ function EvalMute(ele) {
     currentPlayer.muted = isMuted
 }
 
+let player, wasYT = false, isLoaded = false
 function shuffled() {
-    let rand = Math.floor((Math.random() * 20) + 1)
-    $('#yt'+rand).click()
+    if(screen.width < 720 && isClicked) {
+        isClicked = false
+        sbToggle()
+    }
+    if(!wasYT){
+        $('#view').fadeOut('300', () => {
+            if(!isLoaded) {
+                $('#YT').attr('src', 'https://www.youtube.com/iframe_api')
+                isLoaded = true
+            }
+            else onYouTubePlayerAPIReady()
+        })
+        wasYT = true
+    }
+    else {
+        $('#player').fadeOut('fast', () =>{
+            player.destroy()
+            setTimeout(onYouTubePlayerAPIReady, 10)
+        })
+    }
+}
+function onYouTubePlayerAPIReady() {
+    player = new YT.Player('player', {
+        playerVars: { 
+            'autoplay': 1,
+            'autohide': 1,
+            'rel': 0,
+            'modestbranding': 1,
+            'loop': 1,
+            'origin': 'https://54nd339.github.io' || 'https://www.youtube.com'
+        },
+        events: {
+            'onReady': event => {
+                $('#player').fadeIn('slow')
+                event.target.loadPlaylist({
+                    listType:'playlist',
+                    list:'PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4',
+                    index: Math.floor((Math.random() * 20) + 1)
+                })
+                setTimeout(() => player.setShuffle(true), 1000);
+            }
+        }
+    })
 }
 
-function setURL(url){ $('#view').attr('src', url) }
-function check() {
-    setURL(screen.width >= 720 ? 'Assets/Index/Blank.html'
-    : 'https://www.youtube.com/embed/zdXiSlRrgWQ?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')
+function setURL(ele, url) {
+    if(screen.width < 720 && isClicked && !$(ele).hasClass('menu')) {
+        isClicked = false
+        sbToggle()
+    }
+    let viewPort = $('#view')
+    if(wasYT) {
+        viewPort.attr('src', url)
+        setTimeout(() => $('#player').fadeOut('fast'), 100)
+        player.destroy()
+        wasYT = false
+    }
+    else viewPort.fadeOut('fast', () => viewPort.attr('src', url))
+    viewPort.fadeIn('slow')
 }
 function resize() {
     screen.width < 720
         ? $('#menu').removeClass('btn-group-lg')
         : $('#menu').addClass('btn-group-lg')
 }
+
 function code() {
     const codes = []
     let game = $('#game-code')
@@ -124,52 +179,72 @@ function checkEnter(event, ele, text) {
     }
 }
 
-let sBar = false
+let sBar = true, isClicked = false
+function slideRight() {
+    $('#sidebar').animate({ width: 'toggle' }, 500, () => {
+        $(active).fadeIn()
+        $(activeq).fadeIn()
+    })
+}
+function slideLeft() {
+    $(activeq).fadeOut()
+    $(active).fadeOut(() =>
+        $('#sidebar').animate({ width: 'toggle' }, 500))
+}
+function sbToggle() {
+    $('#frm-container').fadeToggle('fast', () =>
+    $('#sidebar').animate({ height: 'toggle' }, 'fast'))
+}
 function bToggle(ele) {
-    if(window.fscr) {
-        if(sBar) {
-            sBar = false
-            $('#sidebar').removeClass('d-lg-block')
-        } else {
-            sBar = true
-            $('#sidebar').addClass('d-lg-block')
+    if(screen.width > 720){
+        if(window.fscr) {
+            sBar ? slideLeft() : slideRight()
+            sBar = sBar ? false : true
         }
+        else ele.href = '#header'
     }
-    else ele.href = '#header'
+    else {
+        isClicked = true
+        sbToggle()
+    }
+}
+function hfToggle() {
+    $('#header').animate({ height: 'toggle' }, 500)
+    $('#footer').animate({ height: 'toggle' }, 500)
 }
 
 window.fscr = false
 function exitFsc(ele) {
     document.documentElement.removeAttribute('class')
-    $('#header').css('display', 'block')
-    $('#footer').css('display', 'block')
-    $('#sidebar').addClass('d-lg-block')
+    if(!sBar) slideRight()
     $('#content').removeClass('mt-2').addClass('mt-3')
     ele.innerHTML = '<i class="fa-solid fa-expand"></i>'
     window.fscr = false
 }
 function goFsc(ele) {
-    setTimeout(() => document.documentElement.setAttribute('class','stuck'), 100)
-    $('#header').css('display', 'none')
-    $('#footer').css('display', 'none')
-    $('#sidebar').removeClass('d-lg-block')
+    setTimeout(() => document.documentElement.setAttribute('class','stuck'), 1000)
+    slideLeft(); sBar = false
     $('#content').removeClass('mt-3').addClass('mt-2')
     ele.innerHTML = '<i class="fa-solid fa-compress"></i>'
     window.fscr = true
 }
 function fsToggle(ele) {
+    hfToggle()
     if(document.fullscreenElement) {
         document.exitFullscreen()
         exitFsc(ele)
-    } else {
+    }
+    else {
         document.documentElement.requestFullscreen()
         goFsc(ele)
     }
 }
 
 addEventListener('fullscreenchange', () => {
-    if(window.fscr && !document.fullscreenElement)
+    if(window.fscr && !document.fullscreenElement){
         exitFsc($('#fscr').get(0))
+        hfToggle()
+    }
 })
 addEventListener("resize", resize)
 addEventListener("storage", code, false)

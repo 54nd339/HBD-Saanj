@@ -45,10 +45,10 @@
         function textToggle() {
             let para = document.getElementById('insert')
             let rand = document.getElementById('random')
-            if(top.fscr) {
+            if(top.fscr || top.screen.width < 720) {
                 para.removeAttribute('style')
                 rand.removeAttribute('style')
-            } else{
+            } else {
                 para.setAttribute('style', 'display:none')
                 rand.setAttribute('style', 'display:none')
             }

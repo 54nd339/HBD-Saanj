@@ -215,32 +215,32 @@ let autoscroll
 function autoScroll(ele) {
     if (!autoscroll) {
         autoscroll = true
-        scroll(4)
+        scroll()
         ele.innerHTML = "Stop Autocroll"
-    }
-    else {
+    } else {
         autoscroll = false
         pause()
         ele.innerHTML = "Auto Scroll"
     }
 }
+function scrollUp() {
+    console.log(autoscroll)
+    if (autoscroll)	$('#autoscr').click()
+    $('html, body').animate({ scrollTop: 10 })
+}
 
 let nav = $('.navbar'), access = false
-if(self !== top) {
+if(self !== top)
     access = true
-}
 else {
     nav.css('display', 'none')
     nav.removeClass('d-flex')
 }
 
 if(screen.width >= 720) {
-    let flag = true
-    let s_toggler, current
-    function scroll(x) {
-        current = x
-        clearInterval(s_toggler)
-        s_toggler = setInterval(() => { scrollBy(0,x) }, 40)
+    let flag = true, s_toggler
+    function scroll() {
+        s_toggler = setInterval(() => { scrollBy(0,7.5) }, 75)
         flag = true
     }
     function pause() {
@@ -253,10 +253,10 @@ if(screen.width >= 720) {
             location.href = '../index.html?hpandya'
         else if (e.key === 'ArrowLeft' && access)
             location.href = '../index.html?sumedh'
+        else if (e.key === ' ' && autoscroll)   $('#autoscr').click()
     }
 }
 else {
-    function pause() { return true }
     let x0, x1, y0, y1
     document.addEventListener('touchstart', e => { 
         x0 = Math.floor(e.touches[0].screenX)
