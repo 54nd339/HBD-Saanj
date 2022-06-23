@@ -24,20 +24,32 @@ function getActiveTiles() {
 }
 
 function handleMouseClick(e) {
-	if (e.target.matches("[data-key]"))
+	if (e.target.matches("[data-key]")) {
 		pressKey(e.target.dataset.key)
-	else if (e.target.matches("[data-enter]"))
+		return
+	}
+	if (e.target.matches("[data-enter]")) {
 		submitGuess()
-	else if (e.target.matches("[data-delete]"))
+		return
+	}
+	if (e.target.matches("[data-delete]")) {
 		deleteKey()
+		return
+	}
 }
 function handleKeyPress(e) {
-	if (e.key === "Enter")
+	if (e.key === "Enter") {
 		submitGuess()
-	else if (e.key === "Backspace" || e.key === "Delete")
+		return
+	}
+	if (e.key === "Backspace" || e.key === "Delete") {
 		deleteKey()
-	else if (e.key.match(/^[a-z]$/))
+		return
+	}
+	if (e.key.match(/^[a-z]$/)) {
 		pressKey(e.key)
+		return
+	}
 }
 
 function pressKey(key) {
@@ -143,13 +155,19 @@ function checkWinLose(guess, tiles) {
 	if (guess === targetWord) {
 		danceTiles(tiles)
 		setTimeout(() => {
-			if(confirm('Your Alphabet : J.'))
+			let code = localStorage.getItem('WordCode')
+			if(code === null) {
+				localStorage.setItem('WordCode', 'J')
+				message = 'Your CodePeice : J. '
+			}
+			message = 'You Win. '
+			if(confirm(message))
 				location.reload()
 		}, 1000)
 		return
 	}
 	if(guessno >= 5) {
-		if (confirm('You Freakin\' Dumbass.'))
+		if (confirm('Damn, Your Arrogance.'))
 			location.reload()
 		return
 	}

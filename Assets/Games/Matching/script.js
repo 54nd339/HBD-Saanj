@@ -104,7 +104,11 @@ class MixOrMatch {
     victory() {
         clearInterval(this.countdown)
         this.audioController.victory()
-        let message = 'Your CodePeice : A'
+        let message='', code = localStorage.getItem('MixCode')
+        if(code === null) {
+            localStorage.setItem('MixCode', 'A')
+            message = 'Your CodePeice : A'
+        }
         this.showStat(true, message)
     }
     gameOver(message) {

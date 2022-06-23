@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/cdcfed7af7.js" crossorigin="anonymous"></script>
@@ -15,50 +16,57 @@
             box-sizing: border-box;
         }
         body{
-            min-height: 100vh;
-            background: url(../../bg.jpg) no-repeat fixed center;
-            background-size: cover;
             font-family: 'Great Vibes', cursive;
+            background: url(../Text/card.jpeg) no-repeat fixed center;
+            background-size: cover;
+            min-height: 100%;
         }
-        .content{
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .content.active{
             height: 80vh;
+            display: flex;
         }
         @media only screen and (min-width: 720px) {
             .main{
                 width: 80%;
-                height: 70vh;
-                background-color: rgba(255, 255, 255, 0.253);
+                height: 75vh;
+                background-color: rgba(255, 255, 255, 0.35);
                 border-radius: 2rem;
             }
         }
-        .container-fluid, .row{
-            height: 70vh;
+        @media only screen and (max-width: 720px) {
+            .photo-size {
+                width: auto;
+                height: 225px;
+                max-height: 225px;
+            }
+            .text, .pics {
+                background-color: rgba(255, 255, 255, 0.35);
+                border-radius: 2rem;
+                width: 95%;
+                transform: translateX(2.5%);
+                font-size: 3vw
+            }
         }
-        .content:not(.active){
-            display:none;
+        .container-fluid, .row{ height: 70vh }
+        p{
+            text-align: center;
+            color: #212529
         }
-        .noscroll::-webkit-scrollbar {
-            display: none;
+        .noscroll::-webkit-scrollbar, .content:not(.active) {
+            display: none
         }
     </style>
 </head>
 <body class="noscroll">
-    <nav class="navbar navbar-expand-xs sticky-top">
-        <nav class="d-flex flex-row">
-            <button class="prev btn m-1 btn-dark btn-lg"><i class="fa-solid fa-circle-chevron-left"></i></button>
-        </nav>
-        <nav class="d-flex flex-row-reverse">
-            <button class="next btn m-1 btn-dark btn-lg"><i class="fa-solid fa-circle-chevron-right"></i></button>
-        </nav>
+    <nav class="navbar navbar-expand-xs d-flex sticky-top justify-content-between">
+        <button class="prev btn m-1 btn-outline-light" onclick="loadPrev()"><i class="fa-solid fa-circle-chevron-left"></i></button>
+        <button class="next btn m-1 btn-outline-light" onclick="loadNext()"><i class="fa-solid fa-circle-chevron-right"></i></button>
     </nav>
-    <section id="hruda" class="start content">
+    <section id="hruda" class="start content active justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Hruda </h3>
                         <p>🍁Happy Birthday Sanjeevani (AKA Queen of cats)🍁<br>
                             Live ur life to the fullest and have fun.. Life is neither easy nor simple, Enjoy whatever it throws..
@@ -71,415 +79,431 @@
                             Wishing again a healthy and prosperous new beginning of ur life!! Happy birthday Moti 🐈</p>
                         <p align="center">By - Hruda (Rude owl) (Aka stone heartless) </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Hruda.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Hruda.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="bans" class="content">
+    <section id="bans" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Bansika </h3>
-                        <p>Happiest Birthday🎇✨, dear SAANJ🤗😌</p>
-                        <p>Wishing you a lifetime of peace and happiness this year🤍</p>
-                        <p>May you become stronger with each passing year🔥</p>
-                        <p>And always do what makes you happy🤍</p>
-                        <p>Love and prioritize urself🤗✨</p>
-                        <p>If I could make anything happens for you,</p>
-                        <p>I'd like to present u bliss n joy🥰💞</p>
-                        <p>Whenever you find urself in dark and you're alone,</p>
-                        <p>REMEMBER, "this too shall pass"..</p>
+                        <p>Happiest Birthday🎇✨, dear SAANJ🤗😌<br>
+                        Wishing you a lifetime of peace and happiness this year🤍<br>
+                        May you become stronger with each passing year🔥<br>
+                        And always do what makes you happy🤍<br>
+                        Love and prioritize urself🤗✨<br>
+                        If I could make anything happens for you,<br>
+                        I'd like to present u bliss n joy🥰💞<br>
+                        Whenever you find urself in light and you're alone,<br>
+                        REMEMBER, "this too shall pass"..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Bans.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Bans.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="shreya" class="content">
+    <section id="shreya" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Shreya </h3>
-                        <p>We ain't getting older baby, But our frndship sure is..</p>
-                        <p>And as you add another year of experience in your life,</p>
-                        <p>I wish you all the lucks of this world.. Happy Birthday!!</p>
-                        <p>Saying bye to the last year of teen is awful indeed..</p>
-                        <p>But this ending would give you hell lot of memories</p>
+                        <p>We ain't getting older baby, But our frndship sure is..<br>
+                        And as you add another year of experience in your life,<br>
+                        I wish you all the lucks of this world.. Happy Birthday!!<br>
+                        Saying bye to the last year of teen is awful indeed..<br>
+                        But this ending would give you hell lot of memories</p>
                         <p align="center">Love, Shreya❤️</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Shreya.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Shreya.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="lika" class="content">
+    <section id="lika" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Lika </h3>
-                        <p>Happy Birthday, SANJU (Copyright he mera iss naam pe)</p>
-                        <p>There were things which worked out between us..</p>
-                        <p>And some didn't.. But whatever it may be,</p>
-                        <p>The most beautiful thing happened was meeting you,</p>
-                        <p>As a bff and a benchmate may it be tution or college..</p>
-                        <p>Won't say much, but I do miss us, But it's life..</p>
-                        <p>At the end of the day what matters is - your happiness</p>
-                        <p>Stay happy, Stay safe</p>
+                        <p>Happy Birthday, SANJU (Copyright he mera iss naam pe)<br>
+                        There were things which worked out between us..<br>
+                        And some didn't.. But whatever it may be,<br>
+                        The most beautiful thing happened was meeting you,<br>
+                        As a bff and a benchmate may it be tution or college..<br>
+                        Won't say much, but I do miss us, But it's life..<br>
+                        At the end of the day what matters is - your happiness<br>
+                        Stay happy, Stay safe</p>
                         <p>With ❤️, Yours - Lika 🤍</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Lika.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Lika.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="shalini" class="content">
+    <section id="shalini" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Shalini </h3>
-                        <p>Because of you,</p>
-                        <p>I laugh a little harder and smile a lot more..</p>
-                        <p>Lucky to have you in my life !!!</p>
-                        <p>Words are short to explain our bond ....</p>
+                        <p>Because of you,<br>
+                        I laugh a little harder and smile a lot more..<br>
+                        Lucky to have you in my life !!!<br>
+                        Words are short to explain our bond ....</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Shalini.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Shalini.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="jaga" class="content">
+    <section id="jaga" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Jagannath </h3>
                         <p> Happy Birthday.. </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Jaga.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Jaga.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sahil" class="content">
+    <section id="sahil" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Sahil </h3>
                         <p> Happy Birthday.. </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Sahil.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Sahil.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="meera" class="content">
+    <section id="meera" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Meera </h3>
                         <p> Happy Birthday.. </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Meera.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Meera.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="kukoo" class="content">
+    <section id="kukoo" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Kukoo </h3>
                         <p> Happy Birthday.. </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Kukoo.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Kukoo.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="lowri" class="content">
+    <section id="lowri" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Lowri </h3>
                         <p> Happy Birthday.. </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Lowri.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Lowri.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ankita" class="content">
+    <section id="ankita" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Ankita </h3>
                         <p> Happy Birthday </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Ankita.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Ankita.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sruti" class="content">
+    <section id="sruti" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Sruti </h3>
                         <p> Happy Birthday </p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Sruti.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Sruti.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="tani" class="content">
+    <section id="tani" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Tanishka </h3>
-                        <p>Heyy Sanjjjj, Happy Birthday to you!!!</p>
-                        <p>Life takes you down many paths..</p>
-                        <p>But the best one leads to a beach..</p>
-                        <p>Where you feet of negative memories gets washed</p>
-                        <p>And let the hair flow in the wind of fresh vibes..</p>
-                        <p>Hoping to meet you once.. 😊😊</p>
+                        <p>Heyy Sanjjjj, Happy Birthday to you!!!<br>
+                        Life takes you down many paths..<br>
+                        But the best one leads to a beach..<br>
+                        Where you feet of negative memories gets washed<br>
+                        And let the hair flow in the wind of fresh vibes..<br>
+                        Hoping to meet you once.. 😊😊</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Tanishka.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Tanishka.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="vaish" class="content">
+    <section id="vaish" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Vaishali </h3>
-                        <p>You're such an innocent, beautiful and pure soul..</p>
-                        <p>I wish for your happiness..</p>
-                        <p>Everything's gonna be fine at the end of the day..</p>
-                        <p>So stay strong, be happy and enjoy your day..</p>
-                        <p>Happy Birthday Dear..</p>
+                        <p>You're such an innocent, beautiful and pure soul..<br>
+                        I wish for your happiness..<br>
+                        Everything's gonna be fine at the end of the day..<br>
+                        So stay strong, be happy and enjoy your day..<br>
+                        Happy Birthday Dear..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Vaishali.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Vaishali.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ujju" class="content">
+    <section id="ujju" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Ujjawal </h3>
-                        <p>I like you the way you are,</p>
-                        <p>Loyal, humble and kind to everyone..</p>
-                        <p>Hope the upcoming years add more good in you..</p>
-                        <p>Happy Birthday, Sanjeebani..</p>
+                        <p>I like you the way you are,<br>
+                        Loyal, humble and kind to everyone..<br>
+                        Hope the upcoming years add more good in you..<br>
+                        Happy Birthday, Sanjeebani..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Ujjawal.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Ujjawal.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="nik" class="content">
+    <section id="nik" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Nik </h3>
-                        <p>Hey Saanj, Happy Birthday!!</p>
-                        <p>I know we got off on the wrong foot a few times..</p>
-                        <p>But I still consider you as a friend of mine..</p>
-                        <p>I hope you enjoy and have a blast on ur special day..</p>
-                        <p>Wishing a lots of happiness ahead in your life..</p>
+                        <p>Hey Saanj, Happy Birthday!!<br>
+                        I know we got off on the wrong foot a few times..<br>
+                        But I still consider you as a friend of mine..<br>
+                        I hope you enjoy and have a blast on ur special day..<br>
+                        Wishing a lots of happiness ahead in your life..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Nik.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Nik.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="jwala" class="content">
+    <section id="jwala" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Jwala </h3>
-                        <p>Happy Birthday Saanj✨ Have a great year ahead😊</p>
-                        <p>Birthdays are a new start, a fresh beginning..</p>
-                        <p>And a time to pursue new endeavors with new goals..</p>
-                        <p>Move forward with confidence and courage..</p>
-                        <p>May all the upcoming days of urs be damn amazing..</p>
+                        <p>Happy Birthday Saanj✨ Have a great year ahead😊<br>
+                        Birthdays are a new start, a fresh beginning..<br>
+                        And a time to pursue new endeavors with new goals..<br>
+                        Move forward with confidence and courage..<br>
+                        May all the upcoming days of urs be damn amazing..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-70" src="Asset/Jwala.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Jwala.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="shiv" class="content">
+    <section id="shiv" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Shivansh </h3>
-                        <p>Happy Birthday, Saanj!!</p>
-                        <p>Your life is just about to pick up speed..</p>
-                        <p>And blast off into the stratosphere, So..</p>
-                        <p>Wear a seat belt and be sure to enjoy this journey..</p>
-                        <p>Once Again, Many Many Happy returns of the day!!</p>
+                        <p>Happy Birthday, Saanj!!<br>
+                        Your life is just about to pick up speed..<br>
+                        And blast off into the stratosphere, So..<br>
+                        Wear a seat belt and be sure to enjoy this journey..<br>
+                        Once Again, Many Many Happy returns of the day!!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Shivansh.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Shivansh.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sejol" class="content">
+    <section id="sejol" class="content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Sejol </h3>
                         <p>16 years of friendship and still counting!!
                             To be honest, I didn't know what true friendship is until I met you..
-                            Thanks for always being there for me..</p>
-                        <p>Thanks for all the bickering that turned into banter,
+                            Thanks for always being there for me..<br><br>
+                        Thanks for all the bickering that turned into banter,
                             The breaking up that turned into make-ups,
-                            and the supportive messages through every single strand of hair on my head..</p>
-                        <p>Happy Birthday to a friend like no other!! I want you to know that to me
+                            and the supportive messages through every single strand of hair on my head..<br><br>
+                        Happy Birthday to a friend like no other!! I want you to know that to me
                             you're not just any old friend but my very best friend..
-                            The impact you've had on my life has been so touching and far greater thank you think..</p>
-                        <p>I wish you a long and happy life, filled with the most magical and memorable times imaginable..</p>
+                            The impact you've had on my life has been so touching and far greater thank you think..<br>
+                        I wish you a long and happy life, filled with the most magical and memorable times imaginable..</p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Sejol.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Sejol.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="gita" class="end content">
+    <section id="gita" class="end content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 col-sm-12 d-flex justify-content-center align-items-center flex-column">
+                    <div class="text col-lg-8 d-flex justify-content-center align-items-center flex-column">
                         <h3 align="center"> Gitanjali </h3>
-                        <p>Hi Sanjeebani, We have barely met n talked..</p>
-                        <p>But whenever I've met, you have this cute <br>
-                            and bright smile on your face..</p>
-                        <p>We shared good talks.. We dunno each other much<br>
-                            but I still root for you..</p>
-                        <p>May this bday be ur best (Coz I wished you :P)</p>
+                        <p>Hi Sanjeebani, We have barely met n talked..<br>
+                        But whenever I've met, you have this cute
+                            and bright smile on your face..<br>
+                        We shared good talks.. We dunno each other much
+                            but I still root for you..<br>
+                        May this bday be ur best (Coz I wished you :P)<br>
                         <p>Stay healthy and wishing you a<br>
                             <b>Yum-yum-yummy birthday..</b></p>
                     </div>
-                    <div class="col-lg-4 col-sm-12 d-flex justify-content-center align-items-center">
-                        <img class="img-fluid w-50" src="Asset/Gita.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
+                    <div class="pics col-lg-4 d-flex justify-content-center align-items-center">
+                        <img class="img-fluid rounded photo-size m-2" src="Asset/Gita.jpg" onerror="this.onerror=null; this.src='Asset/default.jpg';" border="3px solid #555">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <script>
         function makeActive(x) {
-            $('.active').removeClass('active');
-            x.addClass('active');
+            $('.active').removeClass('active')
+            $(x).addClass('active')
         }
-        $('.next').each(function() {
-            $(this).on('click', function () {
-                var current = $('.active');
-                if(current.hasClass('end'))
-                    makeActive($('.start'));
-                else
-                    makeActive($('.active').next());
-            });
-        });
-        $('.prev').each(function() {
-            $(this).on('click', function () {
-                var current = $('.active');
-                if(current.hasClass('start'))
-                    makeActive($('.end'));
-                else
-                    makeActive($('.active').prev());
-            });
-        });
-        $(function () {
-            var ele = window.location.search.split('?')[1];
-            if(ele == null)
-                makeActive($('#hruda'));
-            else {
-                var param = '#'+window.location.search.split('?')[1];
-                makeActive($(param));
-            }
-        });
+        function loadNext() {
+            var current = $('.active')
+            if(current.hasClass('end'))
+                makeActive($('.start'))
+            else
+                makeActive(current.next())
+        }
+        function loadPrev() {
+            var current = $('.active')
+            if(current.hasClass('start'))
+                makeActive($('.end'))
+            else
+                makeActive(current.prev())
+        }
+        document.onkeydown = e => {
+            e = e || window.event
+            if (e.key == 'ArrowRight')
+                loadNext()
+            else if (e.key == 'ArrowLeft')
+                loadPrev()
+        }
+        $(() => {
+            var ele = location.search.split('?')[1]
+            param = (ele == null) ? '.start' : '#'+ele
+            makeActive(param)
+        })
+
         if(screen.width >= 720)
-            var scroll = setInterval(function(){ window.scrollBy(0,1000); }, 100);
+            var scroll = setInterval(() => { window.scrollBy(0,1000) }, 100)
+        else {
+            var x0, x1, y0, y1
+            document.addEventListener('touchstart', e => { 
+                x0 = Math.floor(e.touches[0].screenX)
+                y0 = Math.floor(e.touches[0].screenY)
+            })
+            document.addEventListener('touchend', e => {
+                x1 = Math.floor(e.changedTouches[0].screenX)
+                y1 = Math.floor(e.changedTouches[0].screenY)
+                if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
+                    if (x0 > x1) loadNext()
+                    else if (x0 < x1) loadPrev()
+                }
+            })
+        }
     </script>
 </body>
 </html>

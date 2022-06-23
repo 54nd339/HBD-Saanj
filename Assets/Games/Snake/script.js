@@ -26,11 +26,23 @@ function draw() {
 }
 function main(currentTime) {
 	if (gameOver) {
-		let s = (score >= 100)
-				? 'Here is your code : 5.'
-				: 'Game Over, score 100 to get the code.'
-		if(confirm(s))
-			window.location.reload()
+		let high = localStorage.getItem('SnakeMaxScore')
+		let message = '', code = localStorage.getItem('SnakeCode')
+		if(high < score) {
+			localStorage.setItem('SnakeMaxScore', score)
+			if(code === null) {
+				if(score >= 100) { 
+					message += 'Your CodePeice : 5. '
+					localStorage.setItem('SnakeCode', '5')
+				}
+				else message += 'Try Again, Score 100 to get the code. '
+			}
+			message += 'New High Score : ' +score+ '.'
+		}
+		else
+			message += 'You Scored : ' + score + '.'
+		if(confirm(message))
+			location.reload()
 		return
 	}
 	requestAnimationFrame(main)

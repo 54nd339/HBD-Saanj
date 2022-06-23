@@ -13,6 +13,9 @@ const startScreenElem = document.querySelector("[data-start-screen]")
 let lastTime
 let speedScale
 let score
+if (localStorage.getItem('DinoMaxScore') === null)
+	localStorage.setItem('DinoMaxScore', 0)
+
 function update(time) {
 	if (lastTime == null) {
 		lastTime = time
@@ -68,10 +71,22 @@ function handleLose() {
 		document.addEventListener("keydown", handleStart, { once: true })
 		startScreenElem.classList.remove("hide")
 
-		let s = (score >= 250)
-				? 'Here is your code : 5.'
-				: 'Game Over, score 250 to get the code.'
-		alert(s)
+		let high = localStorage.getItem('DinoMaxScore')
+		let message = '', code = localStorage.getItem('DinoCode')
+		if(high < score) {
+			localStorage.setItem('DinoMaxScore', score)
+			if(code === null){
+				if(score >= 250) {
+					message += 'Your CodePeice : 4. '
+					localStorage.setItem('DinoCode', '4')
+				}
+				else message += 'Try Again, Score 250 to get the code. '
+			}
+			message += 'New High Score : ' +score+ '.'
+		}
+		else
+			message += 'You Scored : ' + score + '.'
+		alert(message)
 	}, 100)
 }
 

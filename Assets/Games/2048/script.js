@@ -10,6 +10,9 @@ grid.randomEmptyCell().tile = new Tile(gameBoard)
 grid.randomEmptyCell().tile = new Tile(gameBoard)
 setupInput()
 
+if (localStorage.getItem('2048MaxScore') === null)
+  	localStorage.setItem('2048MaxScore', 0)
+
 function setupInput() {
 	window.addEventListener("keydown", handleInput, { once: true })
 }
@@ -55,10 +58,24 @@ async function handleInput(e) {
 
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 		newTile.waitForTransition(true).then(() => {
-			let s = (score >= 2500)
-				? 'Here is your code : N.'
-				: 'Game Over, score 2500 to get the code.'
-			if(confirm(s))
+			let high = localStorage.getItem('2048MaxScore')
+			let message = '', code = localStorage.getItem('2048Code')
+			if(high < score) {
+				localStorage.setItem('2048MaxScore', score)
+				if(code === null) {
+					if(score >= 2500) {
+						message += 'Your CodePeice : N. '
+						localStorage.setItem('2048Code', 'N')
+					}
+					else
+						message += 'Try Again, Score 2500 to get the code. '
+				}
+				message += 'New High Score : ' +score+ '.'
+			}
+			else
+				message += 'You Scored : ' + score + '.'
+
+			if(confirm(message))
 				window.location.reload()
 		})
 		return

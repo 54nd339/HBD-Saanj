@@ -243,38 +243,56 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script type = "text/javascript">
-		if(screen.width >= 720){
-        document.onkeydown = checkKey;
-        var scroll; var current; var flag = true;
-        function Scroll(x){
-          current = x;
-          clearInterval(scroll);
-          scroll = setInterval(function(){ window.scrollBy(0,x); }, 40);
-          flag = true;
-        }
-        function checkKey(e) {
-            e = e || window.event;
-            if (e.keyCode == '38') {
-              // up arrow
-              Scroll(-4);
-            }
-            else if (e.keyCode == '40') {
-              // down arrow
-              Scroll(4);
-            }
-            else if (e.keyCode == '32') {
-              // spacebar
-              e.preventDefault();
-              if(flag){
-                clearInterval(scroll);
-                flag = false;
-              }
-              else
-                Scroll(current);
-            }
-        }
-        window.onload = Scroll(4);
-      }
+	if(screen.width >= 720){
+		var flag = true
+		var scroll; var current;
+		function Scroll(x){
+			current = x
+			clearInterval(scroll)
+			scroll = setInterval(() => { window.scrollBy(0,x) }, 40)
+			flag = true
+		}
+		window.onload = Scroll(4)
+		
+		document.onkeydown = e => {
+			e = e || window.event
+			e.preventDefault()
+			if (e.key === 'ArrowUp')
+				Scroll(-4)
+			else if (e.key === 'ArrowDown')
+				Scroll(4)
+
+			if (e.key === 'ArrowRight')
+				window.location.href = '../index.html?hpandya'
+			else if (e.key === 'ArrowLeft')
+				window.location.href = '../index.html?sumedh'
+			else if (e.key === 'Space') {
+				if(flag){
+					clearInterval(scroll)
+					flag = false
+				}
+				else
+					Scroll(current)
+			}
+		}
+    }
+    else {
+		var x0, x1, y0, y1
+		document.addEventListener('touchstart', e => { 
+			x0 = Math.floor(e.touches[0].screenX)
+			y0 = Math.floor(e.touches[0].screenY)
+		})
+		document.addEventListener('touchend', e => {
+			x1 = Math.floor(e.changedTouches[0].screenX)
+			y1 = Math.floor(e.changedTouches[0].screenY)
+			if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
+				if (x0 > x1)
+					window.location.href = '../index.html?hpandya'
+				else if (x0 < x1)
+					window.location.href = '../index.html?sumedh'
+			}
+		})
+    }
 		window.sr = ScrollReveal();
 		sr.reveal('h2', {
 			viewFactor:0.2,

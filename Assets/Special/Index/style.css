@@ -3,7 +3,7 @@ body, html{
 	padding: 0;
 	width: 100%;
 	overflow-x: hidden;
-	background: url(../../../bg.jpg) no-repeat fixed center;
+	background: url(../Asset/Cake.jpeg) no-repeat fixed center;
 	background-size: cover;
 }
 body::-webkit-scrollbar { display: none }
