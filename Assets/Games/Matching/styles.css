@@ -1,7 +1,7 @@
 * { box-sizing: border-box }
 body {
 	font-family: 'Great Vibes', cursive;
-	background: url(../../../bg.jpg) no-repeat fixed center;
+	background: url(../../Index/bg.jpg) no-repeat fixed center;
 	background-size: cover;
 	min-height: 100%;
 }
@@ -146,4 +146,25 @@ body {
 		flex-direction: column;
 		align-items: center;
 	}
+}
+
+.btn, .score {
+	position: fixed;
+	border: 1px solid #1B1734;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	font-family: 'Great Vibes', cursive;
+	padding: 0.5rem 0.7em;
+	background-color: transparent;
+	color: #1B1734;
+	z-index: 11;
+}
+.btn:hover, .score:hover {
+	background: #1B1734;
+	color: #ffffff;
+}
+#rldbtn {
+	top: 5%;
+	left: 0px;
+	transform: translateX(50%);
 }

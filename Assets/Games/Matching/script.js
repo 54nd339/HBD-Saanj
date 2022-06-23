@@ -21,7 +21,6 @@ class MixOrMatch {
         this.ticker = document.getElementById('flips')
         this.audioController = new AudioController()
     }
-
     startGame() {
         this.totalClicks = 0
         this.timeRemaining = this.totalTime
@@ -30,27 +29,25 @@ class MixOrMatch {
         this.busy = true
         setTimeout(() => {
             this.busy = false
-            this.shuffleCards(this.cardsArray);
-            this.countdown = this.startCountdown();
+            // Fisher-Yates Shuffle Algorithm.
+            for (let i = this.cardsArray.length - 1; i > 0; i--) {
+                let randIndex = Math.floor(Math.random() * (i + 1))
+                this.cardsArray[randIndex].style.order = i
+                this.cardsArray[i].style.order = randIndex
+            }
+            this.countdown = (() => {
+                return setInterval(() => {
+                    this.timeRemaining--
+                    this.timer.innerText = this.timeRemaining
+                    if(this.timeRemaining === 0)
+                        this.gameOver('Time ran out :(')
+                }, 1000)
+            })()
         }, 500)
     
         this.cardsArray.forEach(card => card.classList.remove(...['visible','matched']))
         this.timer.innerText = this.timeRemaining
         this.ticker.innerText = this.totalClicks
-    }
-    startCountdown() {
-        return setInterval(() => {
-            this.timeRemaining--;
-            this.timer.innerText = this.timeRemaining;
-            if(this.timeRemaining === 0) {
-                this.gameOver();
-                alert('Time ran out :(');
-            }
-            if(this.totalClicks > 30){
-                this.gameOver();
-                alert('More than 30 clicks :(');
-            }
-        }, 1000);
     }
     flipCard(card) {
         if(!this.busy && !this.matchedCards.includes(card) && card !== this.cardToCheck) {
@@ -92,13 +89,6 @@ class MixOrMatch {
             card2.classList.remove('visible')
             this.busy = false
         }, 1000)
-    }
-    shuffleCards(cardsArray) { // Fisher-Yates Shuffle Algorithm.
-        for (let i = cardsArray.length - 1; i > 0; i--) {
-            let randIndex = Math.floor(Math.random() * (i + 1));
-            cardsArray[randIndex].style.order = i;
-            cardsArray[i].style.order = randIndex;
-        }
     }
 
     victory() {
@@ -142,4 +132,4 @@ function ready() {
     })
     cards.forEach(card => card.addEventListener('click', () => game.flipCard(card)))
 }
-document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', ready) : ready()
+(document.readyState == 'loading') ? document.addEventListener('DOMContentLoaded', ready) : ready()

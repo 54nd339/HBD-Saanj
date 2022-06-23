@@ -1,4 +1,4 @@
-var flag = false
+let flag = false
 function toggle(ele, id) {
     $('.tab-pane[style*="display: block"]').fadeOut('fast',
         () => $('#'+id).fadeIn('slow'))
@@ -11,8 +11,7 @@ function toggle(ele, id) {
             flag = false
         }
         $(ele).addClass('active')
-    }
-    else {
+    } else {
         if(!flag){
             $('#link').fadeOut('fast',
             () => $('#tips').fadeIn('slow'))
@@ -21,14 +20,14 @@ function toggle(ele, id) {
     }
 }
 
-var currentPlayer
+let currentPlayer
 function EvalSound(soundobj) {
     if(soundobj === 'stop') {
         currentPlayer.pause()
         currentPlayer.currentTime = 0
         return
     }
-    var thissound = $('#'+soundobj).get(0)
+    let thissound = $('#'+soundobj).get(0)
     if(currentPlayer && currentPlayer != thissound)
         currentPlayer.pause()
     if (thissound.paused)
@@ -38,46 +37,37 @@ function EvalSound(soundobj) {
     currentPlayer = thissound
 }
 
-function setURL(url){
-    $('#view').attr('src', url)
-}
+function setURL(url){ $('#view').attr('src', url) }
 function check() {
-    if(screen.width >= 720)
-        setURL('Assets/Blank.html')
-    else
-        setURL('https://www.youtube.com/embed/zdXiSlRrgWQ?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')
+    setURL(screen.width >= 720 ? 'Assets/Index/Blank.html'
+    : 'https://www.youtube.com/embed/zdXiSlRrgWQ?list=PLu4obm2oOEJ3sUG3aUsTNEmZXdjlopXT4&autoplay=1&loop=1')
 }
 function resize() {
-    var x = $('#menu')
-    if(screen.width < 720)
-        x.removeClass('btn-group-lg')
-    else 
-        x.addClass('btn-group-lg')
+    screen.width < 720
+        ? $('#menu').removeClass('btn-group-lg')
+        : $('#menu').addClass('btn-group-lg')
 }
 
 function code() {
-    const codes = []; var x = $('#game-code')
-    x.removeClass('text-success').addClass('text-white')
+    const codes = []
+    let game = $('#game-code')
+    game.removeClass('text-success').addClass('text-white')
     codes[0] = localStorage.getItem('2048Code') == null ? '#' : localStorage.getItem('2048Code')
     codes[1] = localStorage.getItem('DinoCode') == null ? '#' : localStorage.getItem('DinoCode')
     codes[2] = localStorage.getItem('MixCode') == null ? '#' : localStorage.getItem('MixCode')
     codes[3] = localStorage.getItem('SnakeCode') == null ? '#' : localStorage.getItem('SnakeCode')
     codes[4] = localStorage.getItem('WordCode') == null ? '#' : localStorage.getItem('WordCode')
-    x.text('Use full screen for better experience.\nYour Code Pieces are : '+codes)
+    game.text('Your Code Pieces are : '+codes)
 
     const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
-    if(countOccurrences(codes, '#') == 0){
-        x.append('\n Rearrange them to get the final code.')
-        x.removeClass('text-white').addClass('text-success')
+    if(countOccurrences(codes, '#') == 0) {
+        game.append('\n Rearrange them to get the final code.')
+        game.removeClass('text-white').addClass('text-success').css('border','solid 1px #198754')
     }
 }
-onload = () => {
-    setTimeout(() => { EvalSound('Music1') }, 1000)
-    resize(); code()
-    $('#start').click()
-}
+
 function compareText(ele) {
-    var text = $('#text').val()
+    let text = $('#text').val()
     if (text.toUpperCase() === '5A4NJ' || text.toUpperCase() === '54ANJ') {
         setURL('Assets/Text/')
         EvalSound('Music2')
@@ -89,7 +79,12 @@ function compareText(ele) {
 }
 function checkEnter(event, ele, text) {
     if (event.key === 'Enter') {
-        compareText(ele)
+        (text === 'passcode') ? accessText() : compareText(ele)
         return false
     }
+}
+onload = () => {
+    setTimeout(() => { EvalSound('Music1') }, 1000)
+    resize(); code()
+    $('#start').click()
 }

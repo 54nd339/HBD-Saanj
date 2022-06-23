@@ -3,23 +3,19 @@
 	user-select: none;
 }
 body {
+	background-color: white;
 	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	font-family: 'Great Vibes', cursive;
 }
 .world {
 	overflow: hidden;
 	position: relative;
 }
-.score {
-	position: fixed;
-	font-size: x-large;
-	font-family: 'Great Vibes', cursive;
-	right: 5%;
-	top: 5%;
-}
+
 .start-screen {
 	position: absolute;
 	font-size: 5vmin;
@@ -27,7 +23,10 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.hide { display: none }
+.hide {
+	display: none
+}
+
 .ground {
 	--left: 0;
 	position: absolute;
@@ -47,4 +46,50 @@ body {
 	left: calc(var(--left) * 1%);
 	height: 30%;
 	bottom: 0;
+}
+
+.btn, .score {
+	position: fixed;
+	border: 1px solid #1B1734;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	font-family: 'Great Vibes', cursive;
+	padding: 0.5rem 0.7em;
+	background-color: transparent;
+	color: #1B1734;
+	z-index: 11;
+}
+.btn:hover, .score:hover {
+	background: #1B1734;
+	color: #ffffff;
+}
+#rldbtn {
+	top: 5%;
+	left: 0px;
+	transform: translateX(50%);
+}
+.score {
+	top: 5%;
+	right: 0px;
+	transform: translateX(-50%);
+}
+
+.alert-container {
+    position: fixed;
+    top: 10vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.alert {
+    pointer-events: none;
+    background-color: hsl(204, 7%, 85%);
+    padding: .75em;
+    border-radius: .25em;
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+    margin-bottom: .5em;
 }

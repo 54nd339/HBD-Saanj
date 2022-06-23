@@ -3,15 +3,67 @@ body, html{
 	padding: 0;
 	width: 100%;
 	overflow-x: hidden;
-	background: url(../Asset/Cake.jpeg) no-repeat fixed center;
-	background-size: cover;
 }
 body::-webkit-scrollbar { display: none }
 .col-lg-12, h2 { overflow-y: hidden }
 
+svg {
+	display: block;
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.scrollElement {
+	position: absolute;
+	height: 6000px;
+	width: 100px;
+	top: 0;
+	z-index: 0;
+}
+.main-content, .navbar, .btn:not(#scroll) {
+	position: fixed;
+}
+.btn {
+	border: 1px solid #fff;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	padding: 0.5rem 0.7em;
+	background-color: transparent;
+	color: #ffffff;
+	z-index: 11;
+}
+.btn:hover {
+	background: #ffffff;
+	color: #1B1734;
+}
+
+#prev {
+	top: 5%;
+	left: 0px;
+	transform: translateX(50%);
+}
+#next {
+	top: 5%;
+	right: 0px;
+	transform: translateX(-50%);
+}
+#fullscr {
+	bottom: 5%;
+	right: 0px;
+	transform: translateX(-50%);
+}
+#autoscr {
+	bottom: 5%;
+	left: 0px;
+	transform: translateX(50%);
+}
+
 .container-fluid {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
+	margin-bottom: 75vh;
 }
 .container-fluid .container h2 {
 	overflow-y: hidden;
@@ -33,22 +85,12 @@ body::-webkit-scrollbar { display: none }
 	padding-top: 1rem;
 	padding-bottom: 2rem;
 }
-.light-overlay {
-	padding: 30px 20px;
-	background-color: rgba(255, 255, 255, 0.1);
-	height: 100%;
-	width: 90%;
-	margin: auto;
-	border-radius: 2em;
-}
-.carousel-inner {
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 2em;
-}
+
 @media only screen and (max-width: 720px){
 	.container-fluid {
 		padding-top: 7.5rem;
 		padding-bottom: 7.5rem;
+		margin-bottom: 110vh;
 	}
 	.container-fluid .container h2{
 		font-size: 3vw;
@@ -82,4 +124,17 @@ body::-webkit-scrollbar { display: none }
 		height: 225px;
 		max-height: 225px;
 	}
+}
+
+.light-overlay {
+	padding: 30px 20px;
+	background-color: rgba(255, 255, 255, 0.1);
+	height: 100%;
+	width: 90%;
+	margin: auto;
+	border-radius: 2em;
+}
+.carousel-inner {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 2em;
 }

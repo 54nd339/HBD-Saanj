@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .sticky-top {
     transition: all 0.25s ease-in;
 }
@@ -19,8 +24,7 @@
     position: relative;
     left: 0;
     opacity: 1;
-}
-.navbar-toggler span:nth-child(1),
+}.navbar-toggler span:nth-child(1),
 .navbar-toggler span:nth-child(3) {
     transition: transform 300ms linear;
 }

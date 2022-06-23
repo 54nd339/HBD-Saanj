@@ -4,7 +4,7 @@ html {
 body {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
-    background: url(../../../bg.jpg) no-repeat fixed center;
+    background: url(../../Index/bg.jpg) no-repeat fixed center;
     background-size: cover;
 }
 
