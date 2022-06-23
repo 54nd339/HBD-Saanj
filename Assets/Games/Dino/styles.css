@@ -14,10 +14,11 @@ body {
 	position: relative;
 }
 .score {
-	position: absolute;
-	font-size: 3vmin;
-	right: 1vmin;
-	top: 1vmin;
+	position: fixed;
+	font-size: x-large;
+	font-family: 'Great Vibes', cursive;
+	right: 5%;
+	top: 5%;
 }
 .start-screen {
 	position: absolute;
@@ -27,7 +28,6 @@ body {
 	transform: translate(-50%, -50%);
 }
 .hide { display: none }
-
 .ground {
 	--left: 0;
 	position: absolute;

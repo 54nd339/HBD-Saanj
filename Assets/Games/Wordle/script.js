@@ -8,11 +8,8 @@ const DANCE_ANIMATION_DURATION = 500
 const keyboard = document.querySelector("[data-keyboard]")
 const alertContainer = document.querySelector("[data-alert-container]")
 const guessGrid = document.querySelector("[data-guess-grid]")
-
-const offsetFromDate = new Date(2022, 0, 1)
-const msOffset = Date.now() - offsetFromDate
-const dayOffset = msOffset / 1000 / 60 / 60 / 24
-const targetWord = targetWords[Math.floor(dayOffset)]
+const targetWord = targetWords[Math.floor((Math.random() * targetWords.length) + 1)]
+let guessno = 0
 
 function startInteraction() {
 	document.addEventListener("click", handleMouseClick)
@@ -27,32 +24,20 @@ function getActiveTiles() {
 }
 
 function handleMouseClick(e) {
-	if (e.target.matches("[data-key]")) {
+	if (e.target.matches("[data-key]"))
 		pressKey(e.target.dataset.key)
-		return
-	}
-	if (e.target.matches("[data-enter]")) {
+	else if (e.target.matches("[data-enter]"))
 		submitGuess()
-		return
-	}
-	if (e.target.matches("[data-delete]")) {
+	else if (e.target.matches("[data-delete]"))
 		deleteKey()
-		return
-	}
 }
 function handleKeyPress(e) {
-	if (e.key === "Enter") {
+	if (e.key === "Enter")
 		submitGuess()
-		return
-	}
-	if (e.key === "Backspace" || e.key === "Delete") {
+	else if (e.key === "Backspace" || e.key === "Delete")
 		deleteKey()
-		return
-	}
-	if (e.key.match(/^[a-z]$/)) {
+	else if (e.key.match(/^[a-z]$/))
 		pressKey(e.key)
-		return
-	}
 }
 
 function pressKey(key) {
@@ -156,15 +141,30 @@ function showAlert(message, duration = 1000) {
 }
 function checkWinLose(guess, tiles) {
 	if (guess === targetWord) {
-		showAlert("You Win", 5000)
 		danceTiles(tiles)
-		stopInteraction()
+		setTimeout(() => {
+			if(confirm('Your Alphabet : J.'))
+				location.reload()
+		}, 1000)
+		return
+	}
+	if(guessno >= 5) {
+		if (confirm('You Freakin\' Dumbass.'))
+			location.reload()
 		return
 	}
 	const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
 	if (remainingTiles.length === 0) {
-		showAlert(targetWord.toUpperCase(), null)
-		stopInteraction()
+		showAlert("Hint : character at "+(guessno+1)+" - "+targetWord.toUpperCase()[guessno++]+". Try Again.", 5000)
+		setTimeout(() => {
+			let x = document.getElementsByClassName('tile')
+			for (let i = 0; i < x.length; i++) {
+				x[i].removeAttribute('data-letter')
+				x[i].removeAttribute('data-state')
+				x[i].innerHTML = ''
+			}
+			startInteraction()
+		}, 2000)
 	}
 }
 startInteraction()

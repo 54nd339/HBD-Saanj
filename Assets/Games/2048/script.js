@@ -1,7 +1,9 @@
 import Grid from "./Grid.js"
+import { score } from "./Grid.js"
 import Tile from "./Tile.js"
 
 const gameBoard = document.getElementById("game-board")
+const scoreElem = document.querySelector("[data-score]")
 
 const grid = new Grid(gameBoard)
 grid.randomEmptyCell().tile = new Tile(gameBoard)
@@ -53,10 +55,16 @@ async function handleInput(e) {
 
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 		newTile.waitForTransition(true).then(() => {
-			alert("You lose")
+			let s = (score >= 2500)
+				? 'Here is your code : N.'
+				: 'Game Over, score 2500 to get the code.'
+			if(confirm(s))
+				window.location.reload()
 		})
 		return
 	}
+
+	scoreElem.textContent = "Score : " + score
 	setupInput()
 }
 

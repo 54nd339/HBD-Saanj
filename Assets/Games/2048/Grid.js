@@ -1,6 +1,7 @@
 const GRID_SIZE = 4
 const CELL_SIZE = 20
 const CELL_GAP = 2
+export var score = 0
 
 export default class Grid {
 	#cells
@@ -90,6 +91,7 @@ class Cell {
 		this.tile.value = this.tile.value + this.mergeTile.value
 		this.mergeTile.remove()
 		this.mergeTile = null
+		score += this.tile.value
 	}
 }
 

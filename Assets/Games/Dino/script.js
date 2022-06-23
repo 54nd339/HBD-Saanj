@@ -67,6 +67,11 @@ function handleLose() {
 	setTimeout(() => {
 		document.addEventListener("keydown", handleStart, { once: true })
 		startScreenElem.classList.remove("hide")
+
+		let s = (score >= 250)
+				? 'Here is your code : 5.'
+				: 'Game Over, score 250 to get the code.'
+		alert(s)
 	}, 100)
 }
 

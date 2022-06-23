@@ -24,6 +24,14 @@ body {
 	padding: var(--cell-gap);
 	position: relative;
 }
+
+.score {
+	position: fixed;
+	font-size: x-large;
+	font-family: 'Great Vibes', cursive;
+	right: 5%;
+	top: 5%;
+}
 .cell {
 	background-color: #AAA;
 	border-radius: 1vmin;

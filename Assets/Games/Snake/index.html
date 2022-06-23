@@ -26,6 +26,13 @@
 			grid-template-rows: repeat(21, 1fr);
 			grid-template-columns: repeat(21, 1fr);
 		}
+		.score {
+			position: fixed;
+			font-size: x-large;
+			font-family: 'Great Vibes', cursive;
+			right: 5%;
+			top: 5%;
+		}
 		.snake {
 			background-color: hsl(200, 100%, 50%);
 			border: .25vmin solid black;
@@ -37,7 +44,7 @@
 	</style>
 </head>
 <body>
-	<div id="game-board">
-	</div>
+	<div class="score" data-score>Score : 0</div>
+	<div id="game-board"></div>
 </body>
 </html>

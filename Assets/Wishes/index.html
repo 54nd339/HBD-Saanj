@@ -16,20 +16,23 @@
         }
         body{
             min-height: 100vh;
-            background: linear-gradient(#7F7FD5,#86A8E7,#91EAE4);
+            background: url(../../bg.jpg) no-repeat fixed center;
+            background-size: cover;
             font-family: 'Great Vibes', cursive;
         }
         .content{
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
         }
-        .main{
-            width: 80%;
-            height: 70vh;
-            background-color: rgba(255, 255, 255, 0.253);
-            border-radius: 2rem;
+        @media only screen and (min-width: 720px) {
+            .main{
+                width: 80%;
+                height: 70vh;
+                background-color: rgba(255, 255, 255, 0.253);
+                border-radius: 2rem;
+            }
         }
         .container-fluid, .row{
             height: 70vh;
@@ -43,6 +46,14 @@
     </style>
 </head>
 <body class="noscroll">
+    <nav class="navbar navbar-expand-xs sticky-top">
+        <nav class="d-flex flex-row">
+            <button class="prev btn m-1 btn-dark btn-lg"><i class="fa-solid fa-circle-chevron-left"></i></button>
+        </nav>
+        <nav class="d-flex flex-row-reverse">
+            <button class="next btn m-1 btn-dark btn-lg"><i class="fa-solid fa-circle-chevron-right"></i></button>
+        </nav>
+    </nav>
     <section id="hruda" class="start content">
         <div class="main">
             <div class="container-fluid">
@@ -440,6 +451,24 @@
             $('.active').removeClass('active');
             x.addClass('active');
         }
+        $('.next').each(function() {
+            $(this).on('click', function () {
+                var current = $('.active');
+                if(current.hasClass('end'))
+                    makeActive($('.start'));
+                else
+                    makeActive($('.active').next());
+            });
+        });
+        $('.prev').each(function() {
+            $(this).on('click', function () {
+                var current = $('.active');
+                if(current.hasClass('start'))
+                    makeActive($('.end'));
+                else
+                    makeActive($('.active').prev());
+            });
+        });
         $(function () {
             var ele = window.location.search.split('?')[1];
             if(ele == null)
@@ -449,7 +478,8 @@
                 makeActive($(param));
             }
         });
-        var scroll = setInterval(function(){ window.scrollBy(0,1000); }, 100);
+        if(screen.width >= 720)
+            var scroll = setInterval(function(){ window.scrollBy(0,1000); }, 100);
     </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 export const SNAKE_SPEED = 5
-const snakeBody = [{ x: 11, y: 11 }]
+export const snakeBody = [{ x: 11, y: 11 }]
 let inputDirection = { x: 0, y: 0 }
 let lastInputDirection = { x: 0, y: 0 }
 let newSegments = 0
@@ -31,12 +31,6 @@ export function onSnake(position, { ignoreHead = false } = {}) {
 			return false
 		return equalPositions(segment, position)
 	})
-}
-export function getSnakeHead() {
-	return snakeBody[0]
-}
-export function snakeIntersection() {
-	return onSnake(snakeBody[0], { ignoreHead: true })
 }
 
 function equalPositions(pos1, pos2) {
