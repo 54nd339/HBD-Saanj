@@ -34,9 +34,27 @@
             <div class="container-fluid">
                 <div class="col d-flex justify-content-center align-items-center flex-column">
                     <h3><strong>SELECT FROM SIDE BAR</strong></h3>
+                    <h5 id="insert">Click on top-left "Saanj" button to slide Sidebar</h5>
+                    <p><b>Choose from the Playlist or Play Random</b></p>
+                    <button id="random" class="btn btn-primary btn-lg mt-2" onclick="top.shuffled()">Random</button>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        function textToggle() {
+            let para = document.getElementById('insert')
+            let rand = document.getElementById('random')
+            if(top.fscr) {
+                para.removeAttribute('style')
+                rand.removeAttribute('style')
+            } else{
+                para.setAttribute('style', 'display:none')
+                rand.setAttribute('style', 'display:none')
+            }
+        }
+        top.addEventListener('fullscreenchange', textToggle)
+        onload = textToggle
+    </script>
 </body>
 </html>

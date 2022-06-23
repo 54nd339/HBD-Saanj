@@ -46,8 +46,8 @@
                     <div class="col-md-8">
                         <p><strong>Play these 5 games and win it.</strong></p>
                         <p><strong>Winning Each game will give a code piece.</strong></p>
-                        <p><strong>Rearrange the pieces and you get the secret code.</strong></p>
-                        <br>
+                        <p><strong>Rearrange the pieces and you get the secret code.</strong></p> <br>
+                        <h5 id="insert" class="text-primary"></h5> <br>
                         <p><strong>Winning Criteria for each game : </strong></p>
                         <p><strong>2048 : Score 4000 or above. (Use arrow keys to move tiles).</strong></p>
                         <p><strong>Dino : Score 250 or above. (Use space to jump)</strong></p>
@@ -136,5 +136,15 @@
             </div>
         </div>
     </section>
+    <script>
+        function textToggle() {
+            document.getElementById('insert').innerHTML = top.fscr ?
+            '<strong>Click on top-left "Saanj" button to slide Sidebar</strong>' : ''
+        }
+        top.addEventListener('fullscreenchange', textToggle)
+        onload = () => {
+            textToggle(); drawSVGPaths('svg', 250, 500, 25)
+        }
+    </script>
 </body>
 </html>

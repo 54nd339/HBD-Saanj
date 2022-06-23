@@ -14,11 +14,27 @@
     <title>Sanjeebani Nanda</title>
 </head>
 <body style="font-family: 'Great Vibes', cursive">
+<div class="alert-container" data-alert-container></div>
 <div id="access">
-    <canvas id="canvas"></canvas>
-    <script src="Assets/Index/particles.js"></script>
-    <section class="passcode">
-        <div class="pass-main">
+    <div class="cats">
+        <div class="cat cat--1">
+            <img src="https://cdn.dribbble.com/users/218750/screenshots/2090988/sleeping_beauty.gif" alt="" onclick="new Audio('Assets/Music/Meow/sleep.mp3').play()">
+        </div>
+        <div class="cat cat--2">
+            <img src="https://cdn.dribbble.com/users/6191/screenshots/2215486/media/1a99b417831923d060a71a77870d5a91.gif" alt="" onclick="new Audio('Assets/Music/Meow/glutt.mp3').play()">
+        </div>
+        <div class="cat cat--3">
+            <img src="https://cdn.dribbble.com/users/6191/screenshots/2211315/meal.gif" alt="" onclick="new Audio('Assets/Music/Meow/heart.mp3').play()">
+        </div>
+        <div class="cat cat--4">
+            <img src="https://cdn.dribbble.com/users/6191/screenshots/1189704/walkingcat.gif" alt="" onclick="new Audio('Assets/Music/Meow/sneek.mp3').play()">
+        </div>
+        <div class="cat cat--5">
+            <img src="https://cdn.dribbble.com/users/6191/screenshots/3661586/cat_sleep_dribbble.gif" alt="" onclick="new Audio('Assets/Music/Meow/teddy.mp3').play()">
+        </div>
+    </div>
+    <section class="passcode" style="pointer-events:none">
+        <div class="pass-main" style="z-index:1">
             <div class="pass-content container-fluid">
                 <div class="cake_and_velas">
                     <div class="candles">
@@ -49,9 +65,10 @@
                         </path>
                         <path fill="#412515" d="M10 475.571h180v4H10z"/>
                     </svg>
-                    <div class="d-flex justify-content-center align-items-center flex-column">
+
+                    <div id="accessform" class="d-flex justify-content-center align-items-center flex-column">
                         <h4 class="m-2">Happy Birthday, Sanjeebani!</h4>
-                        <form>
+                        <form style="pointer-events:all">
                             <input id="passcode" class="form-control form-control-lg m-auto" placeholder="Enter Access Code" required onkeydown="return checkEnter(event, this, 'passcode')">
                             <button class="btn btn-primary btn-lg d-flex mx-auto mt-2" type="button" onclick="accessText()">Enter</button>
                         </form>
@@ -63,19 +80,28 @@
 </div>
 
 <div id="main-content" style="display: none">
-    <div id="header" class="p-5 text-white text-center" style="background-color:#AC30AE">
-        <h1>Happy Birthday!</h1>
-        <p>Ms. Sanjeebani Nanda</p>
+    <div id="header">
+        <div id="wrapper" style="position:relative; overflow:hidden;">
+            <div id="walk-container">
+                <div id="walk" onclick="new Audio('Assets/Music/Meow/enter.mp3').play()"></div>
+            </div>
+            <div id="title" class="text-white text-center" style="pointer-events:none">
+                <h1>Happy Birthday!</h1>
+                <p>Ms. Sanjeebani Nanda</p>
+            </div>
+        </div>
         <audio id="Music1" loop="loop"><source src="Assets/Music/Home.mp3"/></audio>
         <audio id="Music2" loop="loop"><source src="Assets/Music/Wishes.mp3"/></audio>
         <audio id="Music3" loop="loop"><source src="Assets/Music/Special.mp3"/></audio>
         <audio id="Music4" loop="loop"><source src="Assets/Music/Game.mp3"/></audio>
     </div>
-    <span class="position-absolute trigger"> <!-- hidden trigger to apply 'stuck' styles --> </span>
+    <span class="position-absolute trigger">
+        <!-- hidden trigger to apply 'stuck' styles -->
+    </span>
     
     <nav class="navbar navbar-expand-sm sticky-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#header"><img src="Assets/Index/logo.jpg" style="width:50px" class="rounded-circle"></a>
+            <a class="navbar-brand" onclick="bToggle(this)"><img src="Assets/Index/logo.jpg" style="width:50px" class="rounded-circle"></a>
             <button class="navbar-toggler collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span> </span><span> </span><span> </span>
             </button>
@@ -97,7 +123,17 @@
                         <i class="fa-solid fa-music"></i><b> PLAY </b>
                     </button>
                 </div>
-            </nav>  
+            </nav>
+            <nav id="controls" class="justify-content-end d-none d-lg-block">
+                <div class="btn-group btn-group d-flex" role="group">
+                    <button id="mute" class="btn btn-outline-light" onclick="EvalMute(this)">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                    </button>
+                    <button id="fscr" class="btn btn-outline-light" onclick="fsToggle(this)">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                </div>
+            </nav>      
         </div>
     </nav>
 
@@ -236,6 +272,7 @@
                                 </div>
                             </nav>
                         </div>
+                        <div class="d-flex justify-content-center mt-4"><button class="btn btn-outline-primary btn-lg" onclick="shuffled()"><i class="fa-solid fa-shuffle"></i><b> Play Random</b></button></div>
                     </div>
                 </div>
                 <div id="secret" class="tab-pane container-fluid">
@@ -254,7 +291,7 @@
             </div>
             <div id="frm-container" class="col-sm-9 rounded d-flex flex-grow-1">
                 <div id="frame" class="container-fluid" style="overflow: hidden; border-radius: 0.25em;">
-                    <iframe id="view" class="responsive-iframe" src="Assets/Home/Start.html" allowfullscreen></iframe>
+                    <iframe id="view" class="responsive-iframe" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -271,7 +308,7 @@
             </div>
             <div id="form" class="nav m-1 justify-content-center">
                 <form class="d-flex">
-                    <input id="text" class="form-control me-1" placeholder="Enter The Secret Code.." onkeydown="return checkEnter(event, this)">
+                    <input id="text" class="form-control me-1" placeholder="Enter The Secret Code.." onkeydown="return checkEnter(event, this, 'secret')">
                     <button class="btn btn-outline-success" type="button" onclick="compareText(this)">Submit</button>
                 </form>
             </div>
@@ -292,9 +329,7 @@
             else 
                 document.documentElement.setAttribute('class','stuck')
         })).observe(document.querySelector('.trigger'))
-
-        addEventListener("resize", resize)
-        addEventListener("storage", code, false)
     </script>
+</div>
 </body>
 </html>

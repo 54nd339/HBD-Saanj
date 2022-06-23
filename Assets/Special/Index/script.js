@@ -225,8 +225,7 @@ function autoScroll(ele) {
     }
 }
 
-let nav = $('.navbar')
-let access = false
+let nav = $('.navbar'), access = false
 if(self !== top) {
     access = true
 }

@@ -20,7 +20,7 @@ function toggle(ele, id) {
     }
 }
 
-let currentPlayer
+let currentPlayer, isMuted = false
 function EvalSound(soundobj) {
     if(soundobj === 'stop') {
         currentPlayer.pause()
@@ -30,11 +30,24 @@ function EvalSound(soundobj) {
     let thissound = $('#'+soundobj).get(0)
     if(currentPlayer && currentPlayer != thissound)
         currentPlayer.pause()
-    if (thissound.paused)
-        thissound.play()
-    if (currentPlayer != thissound)
+    if(currentPlayer != thissound || currentPlayer.paused) {
         thissound.currentTime = 0
+        thissound.play()
+    }
     currentPlayer = thissound
+    currentPlayer.muted = isMuted
+}
+function EvalMute(ele) {
+    ele.innerHTML = isMuted
+        ? '<i class="fa-solid fa-volume-xmark"></i>'
+        : '<i class="fa-solid fa-volume-low"></i>'
+    isMuted = isMuted ? false : true
+    currentPlayer.muted = isMuted
+}
+
+function shuffled() {
+    let rand = Math.floor((Math.random() * 20) + 1)
+    $('#yt'+rand).click()
 }
 
 function setURL(url){ $('#view').attr('src', url) }
@@ -57,6 +70,7 @@ function code() {
     codes[3] = localStorage.getItem('SnakeCode') == null ? '#' : localStorage.getItem('SnakeCode')
     codes[4] = localStorage.getItem('WordCode') == null ? '#' : localStorage.getItem('WordCode')
     game.text('Your Code Pieces are : '+codes)
+
     const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
     if(countOccurrences(codes, '#') == 0) {
         game.append('\n Rearrange them to get the final code.')
@@ -64,22 +78,33 @@ function code() {
     }
 }
 
+function showAlert() {
+	const alert = document.createElement('div')
+	alert.textContent = 'Invalid Code. Access Denied. Try Again.'
+	alert.classList.add('alert')
+	$('[data-alert-container]').prepend(alert)
+
+    setTimeout(() => {
+        alert.classList.add('hide')
+        alert.addEventListener('transitionend', alert.remove())
+    }, 5000)
+}
 function accessText() {
-    let text = $('#passcode').val()
-    if (text === btoa('54Anj')) {
-        $('#main-content').fadeIn('fast', () =>
-            $('.passcode').slideUp(2000, () =>
-                $('#access').slideUp(1000, () =>
-                    $('html, body').animate({
-                        scrollTop: $('.trigger').offset().top+10
-                    }, 500)
-                )
-            )
-        )
+    if ($('#passcode').val() === btoa('5A4nj')) {
+        $('.passcode').fadeOut('fast', () => {
+            $.when(setTimeout(() => {
+                new Audio('Assets/Music/Meow/enter.mp3').play()
+            }, 1000)).then(() => $('#start').click())
+            $('#main-content').fadeIn(2500)
+            $('.cats').slideUp(2000, () => {
+                $('html, body').animate({
+                    scrollTop: $('.trigger').offset().top+0.45
+                }, 500)
+            })
+        })
         resize(); code()
-        $('#start').click()
-    } else
-        alert('Invalid Code. Access Denied. Try Again.')
+    }
+    else showAlert()
 }
 function compareText(ele) {
     let text = $('#text').val()
@@ -89,8 +114,8 @@ function compareText(ele) {
         setTimeout(() => { EvalSound('stop') }, 70000)
         toggle(ele, 'secret')
         $('#special').removeClass('disabled')
-    } else 
-        alert('Invalid Code. Access Denied. Try Again.')
+    }
+    else showAlert()
 }
 function checkEnter(event, ele, text) {
     if (event.key === 'Enter') {
@@ -98,3 +123,53 @@ function checkEnter(event, ele, text) {
         return false
     }
 }
+
+let sBar = false
+function bToggle(ele) {
+    if(window.fscr) {
+        if(sBar) {
+            sBar = false
+            $('#sidebar').removeClass('d-lg-block')
+        } else {
+            sBar = true
+            $('#sidebar').addClass('d-lg-block')
+        }
+    }
+    else ele.href = '#header'
+}
+
+window.fscr = false
+function exitFsc(ele) {
+    document.documentElement.removeAttribute('class')
+    $('#header').css('display', 'block')
+    $('#footer').css('display', 'block')
+    $('#sidebar').addClass('d-lg-block')
+    $('#content').removeClass('mt-2').addClass('mt-3')
+    ele.innerHTML = '<i class="fa-solid fa-expand"></i>'
+    window.fscr = false
+}
+function goFsc(ele) {
+    setTimeout(() => document.documentElement.setAttribute('class','stuck'), 100)
+    $('#header').css('display', 'none')
+    $('#footer').css('display', 'none')
+    $('#sidebar').removeClass('d-lg-block')
+    $('#content').removeClass('mt-3').addClass('mt-2')
+    ele.innerHTML = '<i class="fa-solid fa-compress"></i>'
+    window.fscr = true
+}
+function fsToggle(ele) {
+    if(document.fullscreenElement) {
+        document.exitFullscreen()
+        exitFsc(ele)
+    } else {
+        document.documentElement.requestFullscreen()
+        goFsc(ele)
+    }
+}
+
+addEventListener('fullscreenchange', () => {
+    if(window.fscr && !document.fullscreenElement)
+        exitFsc($('#fscr').get(0))
+})
+addEventListener("resize", resize)
+addEventListener("storage", code, false)
