@@ -47,7 +47,6 @@ function resize() {
         ? $('#menu').removeClass('btn-group-lg')
         : $('#menu').addClass('btn-group-lg')
 }
-
 function code() {
     const codes = []
     let game = $('#game-code')
@@ -58,7 +57,6 @@ function code() {
     codes[3] = localStorage.getItem('SnakeCode') == null ? '#' : localStorage.getItem('SnakeCode')
     codes[4] = localStorage.getItem('WordCode') == null ? '#' : localStorage.getItem('WordCode')
     game.text('Your Code Pieces are : '+codes)
-
     const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
     if(countOccurrences(codes, '#') == 0) {
         game.append('\n Rearrange them to get the final code.')
@@ -66,6 +64,23 @@ function code() {
     }
 }
 
+function accessText() {
+    let text = $('#passcode').val()
+    if (text === btoa('54Anj')) {
+        $('#main-content').fadeIn('fast', () =>
+            $('.passcode').slideUp(2000, () =>
+                $('#access').slideUp(1000, () =>
+                    $('html, body').animate({
+                        scrollTop: $('.trigger').offset().top+10
+                    }, 500)
+                )
+            )
+        )
+        resize(); code()
+        $('#start').click()
+    } else
+        alert('Invalid Code. Access Denied. Try Again.')
+}
 function compareText(ele) {
     let text = $('#text').val()
     if (text.toUpperCase() === '5A4NJ' || text.toUpperCase() === '54ANJ') {
@@ -82,9 +97,4 @@ function checkEnter(event, ele, text) {
         (text === 'passcode') ? accessText() : compareText(ele)
         return false
     }
-}
-onload = () => {
-    setTimeout(() => { EvalSound('Music1') }, 1000)
-    resize(); code()
-    $('#start').click()
 }

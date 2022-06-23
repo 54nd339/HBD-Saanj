@@ -211,7 +211,7 @@ function fullScreen(ele) {
     }
 }
 
-let autoscroll = false
+let autoscroll
 function autoScroll(ele) {
     if (!autoscroll) {
         autoscroll = true
@@ -223,6 +223,16 @@ function autoScroll(ele) {
         pause()
         ele.innerHTML = "Auto Scroll"
     }
+}
+
+let nav = $('.navbar')
+let access = false
+if(self !== top) {
+    access = true
+}
+else {
+    nav.css('display', 'none')
+    nav.removeClass('d-flex')
 }
 
 if(screen.width >= 720) {
@@ -240,9 +250,9 @@ if(screen.width >= 720) {
     }
     document.onkeydown = e => {
         e = e || window.event
-        if (e.key === 'ArrowRight')
+        if (e.key === 'ArrowRight' && access)
             location.href = '../index.html?hpandya'
-        else if (e.key === 'ArrowLeft')
+        else if (e.key === 'ArrowLeft' && access)
             location.href = '../index.html?sumedh'
     }
 }
@@ -256,7 +266,7 @@ else {
     document.addEventListener('touchend', e => {
         x1 = Math.floor(e.changedTouches[0].screenX)
         y1 = Math.floor(e.changedTouches[0].screenY)
-        if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
+        if (Math.abs(x0-x1) > Math.abs(y0-y1) && access) {
             if (x0 > x1)
                 location.href = '../index.html?hpandya'
             else if (x0 < x1)

@@ -21,10 +21,7 @@
             background-size: cover;
             min-height: 100%;
         }
-        .content.active{
-            height: 80vh;
-            display: flex;
-        }
+        .content{ height: 80vh }
         @media only screen and (min-width: 720px) {
             .main{
                 width: 80%;
@@ -52,17 +49,17 @@
             text-align: center;
             color: #212529
         }
-        .noscroll::-webkit-scrollbar, .content:not(.active) {
+        .noscroll::-webkit-scrollbar, .content {
             display: none
         }
     </style>
 </head>
 <body class="noscroll">
     <nav class="navbar navbar-expand-xs d-flex sticky-top justify-content-between">
-        <button class="prev btn m-1 btn-outline-light" onclick="loadPrev()"><i class="fa-solid fa-circle-chevron-left"></i></button>
-        <button class="next btn m-1 btn-outline-light" onclick="loadNext()"><i class="fa-solid fa-circle-chevron-right"></i></button>
+        <button class="prev btn m-1 btn-outline-primary" onclick="loadPrev()"><i class="fa-solid fa-circle-chevron-left"></i></button>
+        <button class="next btn m-1 btn-outline-primary" onclick="loadNext()"><i class="fa-solid fa-circle-chevron-right"></i></button>
     </nav>
-    <section id="hruda" class="start content active justify-content-center align-items-center">
+    <section id="hruda" class="start content justify-content-center align-items-center">
         <div class="main">
             <div class="container-fluid">
                 <div class="row">
@@ -457,52 +454,66 @@
 
     <script>
         function makeActive(x) {
-            $('.active').removeClass('active')
-            $(x).addClass('active')
+            let active = $('.content[style*="display: flex"]')
+            if(active.length == 0)
+                x.fadeIn().css('display', 'flex')
+            else
+                active.fadeOut('fast', () => x.fadeIn('slow').css('display', 'flex'))
         }
+        $(() => {
+            let ele = location.search.split('?')[1]
+            if(ele == null)
+                open("../","_self")
+            else {
+                let param = '#'+location.search.split('?')[1]
+                makeActive($(param))
+            }
+        })
         function loadNext() {
-            var current = $('.active')
+            let current = $('.content[style*="display: flex"]')
             if(current.hasClass('end'))
                 makeActive($('.start'))
             else
                 makeActive(current.next())
         }
         function loadPrev() {
-            var current = $('.active')
+            let current = $('.content[style*="display: flex"]')
             if(current.hasClass('start'))
                 makeActive($('.end'))
             else
                 makeActive(current.prev())
         }
-        document.onkeydown = e => {
-            e = e || window.event
-            if (e.key == 'ArrowRight')
-                loadNext()
-            else if (e.key == 'ArrowLeft')
-                loadPrev()
+        let nav = $('.navbar')
+        if(self !== top) {
+            nav.css('display', 'block')
+            document.onkeydown = e => {
+                e = e || window.event
+                if (e.key == 'ArrowRight')
+                    loadNext()
+                else if (e.key == 'ArrowLeft')
+                    loadPrev()
+            } 
+            if(screen.width >= 720)
+                var scroll = setInterval(() => { scrollBy(0,1000) }, 100)
+            else {
+                let x0, x1, y0, y1
+                document.addEventListener('touchstart', e => { 
+                    x0 = Math.floor(e.touches[0].screenX)
+                    y0 = Math.floor(e.touches[0].screenY)
+                })
+                document.addEventListener('touchend', e => {
+                    x1 = Math.floor(e.changedTouches[0].screenX)
+                    y1 = Math.floor(e.changedTouches[0].screenY)
+                    if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
+                        if (x0 > x1) loadNext()
+                        else if (x0 < x1) loadPrev()
+                    }
+                })
+            }
         }
-        $(() => {
-            var ele = location.search.split('?')[1]
-            param = (ele == null) ? '.start' : '#'+ele
-            makeActive(param)
-        })
-
-        if(screen.width >= 720)
-            var scroll = setInterval(() => { window.scrollBy(0,1000) }, 100)
-        else {
-            var x0, x1, y0, y1
-            document.addEventListener('touchstart', e => { 
-                x0 = Math.floor(e.touches[0].screenX)
-                y0 = Math.floor(e.touches[0].screenY)
-            })
-            document.addEventListener('touchend', e => {
-                x1 = Math.floor(e.changedTouches[0].screenX)
-                y1 = Math.floor(e.changedTouches[0].screenY)
-                if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
-                    if (x0 > x1) loadNext()
-                    else if (x0 < x1) loadPrev()
-                }
-            })
+        else{
+            nav.css('display', 'none')
+            nav.removeClass('d-flex')
         }
     </script>
 </body>

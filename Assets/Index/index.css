@@ -3,6 +3,126 @@
     padding: 0;
     box-sizing: border-box;
 }
+#canvas {
+    z-index: -1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url("bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.passcode {
+    z-index:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.pass-main{
+    width: 30vw;
+    height: 50vh;
+    background-color: rgba(255, 255, 255, 0.253);
+    border-radius: 2rem;
+}
+@media only screen and (max-width: 720px) {
+    .pass-main{
+        width: 90vw;
+        height: 400px;
+        background-color: rgba(255, 255, 255, 0.253);
+        border-radius: 2rem;
+    }
+}
+
+.cake_and_velas {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: -20vh;
+    overflow: hidden;
+} 
+#cake {
+    display: block;
+    position: relative;
+    margin: -10em auto 0 auto;
+}
+/* Candles */
+.candles {
+    background: #ffffff;
+    border-radius: 10px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-left: -2.4px;
+    margin-top: -8.33333333px;
+    width: 5px;
+    height: 35px;
+    transform: translateY(-300px);
+    backface-visibility: hidden;
+    animation: in 500ms 6s ease-out forwards;
+}
+.candles:after,
+.candles:before {
+    background: rgba(255, 0, 0, 0.4);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.22222222px;
+}
+.candles:after {
+    top: 25%;
+    left: 0;
+}
+.candles:before {
+    top: 45%;
+    left: 0;
+}
+/* Fire */
+.fire {
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -2.6px;
+    width: 6.66666667px;
+    height: 18px;
+}
+.fire:nth-child(1) {
+    animation: fuego 2s 6.5s infinite;
+}
+.fire:nth-child(2) {
+    animation: fuego 1.5s 6.5s infinite;
+}
+.fire:nth-child(3) {
+    animation: fuego 1s 6.5s infinite;
+}
+.fire:nth-child(4) {
+    animation: fuego 0.5s 6.5s infinite;
+}
+.fire:nth-child(5) {
+    animation: fuego 0.2s 6.5s infinite;
+}
+/* Fire Animation */
+@keyframes fuego {
+    0%, 100% {
+        background: rgba(254, 248, 97, 0.5);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        transform: translateY(-20px) scale(0);
+    }
+}
+@keyframes in {
+    to {
+        transform: translateY(0);
+    }
+}
+
 .sticky-top {
     transition: all 0.25s ease-in;
 }

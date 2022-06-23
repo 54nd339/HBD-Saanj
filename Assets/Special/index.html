@@ -31,34 +31,11 @@
             width: auto;
             max-height: 70vh;
         }
-        .content.active{
-            height: 100vh;
-            display: flex;
-        }
+        .content{ height: 100vh }
         .container-fluid, .row{ height: 70vh }
         .noscroll::-webkit-scrollbar,
         .content { display: none }
     </style>
-    <script>
-        var flag1 = false; var flag2 = false;
-        function resize() {
-            var imgs = document.querySelectorAll('#image')
-            if(screen.width < 720) {
-                for(var i = 0; i < imgs.length; i++){
-                    imgs[i].classList.add('w-100')
-                    imgs[i].classList.add('h-100')
-                }
-                flag1 = true; flag2 = true;
-            }
-            else if(flag1 && flag2) {
-                for(var i = 0; i < imgs.length; i++){
-                    imgs[i].classList.remove('w-100')
-                    imgs[i].classList.remove('h-100')
-                }
-                flag2 = false
-            }
-        }
-    </script>
 </head>
 <body class="noscroll">
     <nav class="navbar navbar-expand-xs d-flex sticky-top justify-content-between">
@@ -148,62 +125,71 @@
 
     <script>
         function makeActive(x) {
-            $('.active').removeClass('active')
-            x.addClass('active')
+            let active = $('.content[style*="display: flex"]')
+            if(active.length == 0)
+                x.fadeIn().css('display', 'flex')
+            else
+                active.fadeOut('fast', () => x.fadeIn('slow').css('display', 'flex'))
         }
         function loadIndex(x) {
-            x.removeClass('active')
-            window.location.href = 'Index/'
+            x.fadeOut('fast', () => location.href = 'Index/')
         }
         function loadNext() {
-            var current = $('.active')
+            let current = $('.content[style*="display: flex"]')
             if(current.hasClass('end'))
                 loadIndex(current)
             else
                 makeActive(current.next())
         }
         function loadPrev() {
-            var current = $('.active')
+            let current = $('.content[style*="display: flex"]')
             if(current.hasClass('start'))
                 loadIndex(current)
             else
                 makeActive(current.prev())
         }
-        document.onkeydown = e => {
-            e = e || window.event
-            if (e.key === 'ArrowRight')
-                loadNext()
-            else if (e.key === 'ArrowLeft')
-                loadPrev()
-        }
         $(() => {
-            var ele = window.location.search.split('?')[1]
+            let ele = location.search.split('?')[1]
             if(ele == null)
-                window.location.href = 'Index/'
+                location.href = 'Index/'
             else {
-                var param = '#'+window.location.search.split('?')[1]
+                let param = '#'+location.search.split('?')[1]
                 makeActive($(param))
             }
+            let scroll = setInterval(() => { scrollBy(0,1000) }, 100)
         })
-        if(screen.width >= 720)
-            var scroll = setInterval(() => { window.scrollBy(0,1000) }, 100)
-        else {
-            resize()
-            var x0, x1, y0, y1
-            document.addEventListener('touchstart', e => { 
-                x0 = Math.floor(e.touches[0].screenX)
-                y0 = Math.floor(e.touches[0].screenY)
-            })
-            document.addEventListener('touchend', e => {
-                x1 = Math.floor(e.changedTouches[0].screenX)
-                y1 = Math.floor(e.changedTouches[0].screenY)
-                if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
-                    if (x0 > x1) loadNext()
-                    else if (x0 < x1) loadPrev()
-                }
-            })
+
+        let nav = $('.navbar')
+        if(self !== top) {
+            nav.css('display', 'block')
+            document.onkeydown = e => {
+                e = e || window.event
+                if (e.key == 'ArrowRight')
+                    loadNext()
+                else if (e.key == 'ArrowLeft')
+                    loadPrev()
+            }
+
+            if(screen.width < 720) {
+                let x0, x1, y0, y1
+                document.addEventListener('touchstart', e => { 
+                    x0 = Math.floor(e.touches[0].screenX)
+                    y0 = Math.floor(e.touches[0].screenY)
+                })
+                document.addEventListener('touchend', e => {
+                    x1 = Math.floor(e.changedTouches[0].screenX)
+                    y1 = Math.floor(e.changedTouches[0].screenY)
+                    if (Math.abs(x0-x1) > Math.abs(y0-y1)) {
+                        if (x0 > x1) loadNext()
+                        else if (x0 < x1) loadPrev()
+                    }
+                })
+            }
         }
-        window.addEventListener('resize', e => { resize() })
+        else{
+            nav.css('display', 'none')
+            nav.removeClass('d-flex')
+        }
     </script>
 </body>
 </html>
