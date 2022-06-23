@@ -1,0 +1,85 @@
+body, html{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	overflow-x: hidden;
+    background: linear-gradient(#7F7FD5,#86A8E7,#91EAE4);
+}
+body::-webkit-scrollbar { display: none }
+.col-lg-12, h2 { overflow-y: hidden }
+
+.container-fluid {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+.container-fluid .container h2 {
+	overflow-y: hidden;
+	font-family: 'Great Vibes', cursive;
+	text-align: center;
+	line-height: 3rem;
+	text-decoration: underline overline solid #333;
+	letter-spacing: 3.5px;
+	font-weight: bolder;
+}
+.container-fluid .container p {
+	text-align: center;
+	font-size: 18px;
+	line-height: 1.8rem;
+	font-family: 'Indie Flower', cursive;
+	font-weight: bold;
+	word-spacing: 0.4rem;
+	letter-spacing: 0.08rem;
+	padding-top: 1rem;
+	padding-bottom: 2rem;
+}
+.light-overlay {
+	padding: 30px 20px;
+	background-color: rgba(255, 255, 255, 0.1);
+	height: 100%;
+	width: 90%;
+	margin: auto;
+	border-radius: 2em;
+}
+.carousel-inner {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 2em;
+}
+
+@media only screen and (max-width: 720px){
+	.container-fluid {
+		padding-top: 7.5rem;
+		padding-bottom: 7.5rem;
+	}
+	.container-fluid .container h2{
+		font-size: 3vw;
+		line-height: 1.5rem;
+		letter-spacing: 1.5px;
+	}
+	.container-fluid .container p{
+		font-size: 2.5vw;
+		line-height: 0.9rem;
+		word-spacing: 0.2rem;
+		letter-spacing: 0.08rem;
+	}
+}
+@media only screen and (max-width: 1600px){
+	.photo-size {
+		width: auto;
+		height: 450px;
+		max-height: 450px;
+	}
+}
+@media only screen and (max-width: 800px){
+	.photo-size {
+		width: auto;
+		height: 350px;
+		max-height: 350px;
+	}
+}
+@media only screen and (max-width: 500px){
+	.photo-size {
+		width: auto;
+		height: 225px;
+		max-height: 225px;
+	}
+}
